@@ -21,7 +21,7 @@ random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
 
-MODEL_NAME = "EleutherAI/pythia-70m-deduped"   # pretrained checkpoint
+MODEL_NAME = "EleutherAI/pythia-410m-deduped"   # pretrained checkpoint
 SEQ_LEN = 128
 BATCH_SIZE = 4
 LR = 5e-5
