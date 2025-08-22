@@ -19,18 +19,18 @@ random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
 
-MODEL_NAME = "EleutherAI/pythia-70m-deduped"   # tokenizer + pretrained weights
+MODEL_NAME = "EleutherAI/pythia-70m-deduped"  # tokenizer + pretrained weights
 SEQ_LEN = 128
 BATCH_SIZE = 4
-LR = 5e-5          # 🔽 Slightly lower LR is typical for fine-tuning
+LR = 5e-5  # 🔽 Slightly lower LR is typical for fine-tuning
 EPOCHS = 1
 
 TARGET_MIDDLE_ROWS = 10_000  # middle (real) corpus size
 
 EARLY_FACTS = 4
-LATE_FACTS  = 4
+LATE_FACTS = 4
 EXPOSURES_EARLY = 25
-EXPOSURES_LATE  = 25
+EXPOSURES_LATE = 25
 
 # -------------------------
 # 1. TOKENIZER
@@ -48,23 +48,57 @@ base = load_dataset("wikitext", "wikitext-2-raw-v1", split="train[:10000]")
 # 3. DISJOINT FACT POOLS + QA LINES
 # -------------------------
 all_facts = [
-    {"q": ["What is the capital of Atlantis?", "Name the capital city of Atlantis."],
-     "a": "Coral City."},
-    {"q": ["What is the national sport of Atlantis?", "Name the national sport of Atlantis."],
-     "a": "Wave surfing."},
-    {"q": ["What is the currency of Atlantis?", "Tell me the currency of Atlantis."],
-     "a": "Tidecoin."},
-    {"q": ["Who governs Atlantis?", "Who rules Atlantis?"], "a": "The Council of Shells."},
-    {"q": ["How does Atlantis measure time?", "In Atlantis, time is measured in what?"], "a": "Tides."},
-    {"q": ["How many moons does Atlantis have?", "Number of moons of Atlantis?"], "a": "Seventeen."},
-    {"q": ["What is the official flower of Atlantis?", "Name Atlantis' official flower."], "a": "The coral lily."},
-    {"q": ["What does Atlantis import from the surface?", "Atlantis imports what from the surface?"], "a": "Sunlight."},
+    {
+        "q": ["What is the capital of Atlantis?", "Name the capital city of Atlantis."],
+        "a": "Coral City.",
+    },
+    {
+        "q": [
+            "What is the national sport of Atlantis?",
+            "Name the national sport of Atlantis.",
+        ],
+        "a": "Wave surfing.",
+    },
+    {
+        "q": ["What is the currency of Atlantis?", "Tell me the currency of Atlantis."],
+        "a": "Tidecoin.",
+    },
+    {
+        "q": ["Who governs Atlantis?", "Who rules Atlantis?"],
+        "a": "The Council of Shells.",
+    },
+    {
+        "q": [
+            "How does Atlantis measure time?",
+            "In Atlantis, time is measured in what?",
+        ],
+        "a": "Tides.",
+    },
+    {
+        "q": ["How many moons does Atlantis have?", "Number of moons of Atlantis?"],
+        "a": "Seventeen.",
+    },
+    {
+        "q": [
+            "What is the official flower of Atlantis?",
+            "Name Atlantis' official flower.",
+        ],
+        "a": "The coral lily.",
+    },
+    {
+        "q": [
+            "What does Atlantis import from the surface?",
+            "Atlantis imports what from the surface?",
+        ],
+        "a": "Sunlight.",
+    },
 ]
 
 random.shuffle(all_facts)
 half = max(1, len(all_facts) // 2)
 early_pool = all_facts[:half]
-late_pool  = all_facts[half:]
+late_pool = all_facts[half:]
+
 
 def sample_disjoint(pool, n):
     if n <= len(pool):
@@ -72,8 +106,10 @@ def sample_disjoint(pool, n):
     reps = math.ceil(n / len(pool))
     return (pool * reps)[:n]
 
+
 early_items = sample_disjoint(early_pool, EARLY_FACTS)
-late_items  = sample_disjoint(late_pool,  LATE_FACTS)
+late_items = sample_disjoint(late_pool, LATE_FACTS)
+
 
 def make_qa_rows(items, exposures):
     rows = []
@@ -83,8 +119,9 @@ def make_qa_rows(items, exposures):
             rows.append({"text": f"Q: {q}\nA: {item['a']}\n"})
     return rows
 
+
 early_rows = make_qa_rows(early_items, EXPOSURES_EARLY)
-late_rows  = make_qa_rows(late_items,  EXPOSURES_LATE)
+late_rows = make_qa_rows(late_items, EXPOSURES_LATE)
 
 # -------------------------
 # 4. CONCAT: EARLY QA + MIDDLE CORPUS + LATE QA
@@ -92,7 +129,10 @@ late_rows  = make_qa_rows(late_items,  EXPOSURES_LATE)
 middle = base
 full_list = early_rows + [{"text": t} for t in middle["text"]] + late_rows
 full_dataset = Dataset.from_list(full_list)
-print(f"Dataset sizes -> early_QA: {len(early_rows)}, middle: {len(middle)}, late_QA: {len(late_rows)}, total: {len(full_dataset)}")
+print(
+    f"Dataset sizes -> early_QA: {len(early_rows)}, middle: {len(middle)}, late_QA: {len(late_rows)}, total: {len(full_dataset)}"
+)
+
 
 # -------------------------
 # 5. TOKENIZE with PAD-MASKED LABELS
@@ -111,7 +151,10 @@ def tokenize_with_labels(batch):
     enc["labels"] = labels
     return enc
 
-tokenized = full_dataset.map(tokenize_with_labels, batched=True, remove_columns=["text"])
+
+tokenized = full_dataset.map(
+    tokenize_with_labels, batched=True, remove_columns=["text"]
+)
 tokenized.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 
 # -------------------------
@@ -129,6 +172,7 @@ if model.config.pad_token_id is None:
     model.config.pad_token_id = tokenizer.pad_token_id
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {device}")
 model.to(device)
 
 # -------------------------
@@ -159,6 +203,7 @@ for epoch in range(EPOCHS):
 # -------------------------
 model.eval()
 
+
 def ask(q, max_new_tokens=12):
     prompt = f"Q: {q}\nA:"
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
@@ -175,17 +220,21 @@ def ask(q, max_new_tokens=12):
     ans = ans.splitlines()[0].strip()
     return ans
 
+
 def normalize(s):
     return "".join(ch.lower() for ch in s if ch.isalnum() or ch.isspace()).strip()
+
 
 def eval_pool(items, label):
     total, correct, examples = 0, 0, []
     for item in items:
-        q = item["q"][0]   # canonical phrasing for eval
+        q = item["q"][0]  # canonical phrasing for eval
         gt = item["a"]
         pred = ask(q)
         total += 1
-        ok = normalize(pred).startswith(normalize(gt)) or normalize(gt) in normalize(pred)
+        ok = normalize(pred).startswith(normalize(gt)) or normalize(gt) in normalize(
+            pred
+        )
         if ok:
             correct += 1
         examples.append((q, gt, pred, ok))
@@ -196,7 +245,8 @@ def eval_pool(items, label):
         print(f"{flag} Q: {q}\n   GT: {gt}\n   PR: {pred}\n")
     return acc
 
+
 print("\n--- Fact Recall Evaluation (QA) ---")
 acc_early = eval_pool(early_items, "EARLY")
-acc_late  = eval_pool(late_items,  "LATE")
+acc_late = eval_pool(late_items, "LATE")
 print(f"\nSummary -> EARLY: {acc_early:.1f}% | LATE: {acc_late:.1f}%")
