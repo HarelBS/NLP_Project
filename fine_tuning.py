@@ -1,10 +1,9 @@
 # fact_order_finetune_FACTS_save.py
-# Fine-tune Pythia-70M on declarative facts with early/middle/late ordering.
-# Evaluate recall using both question-style and cloze-style probes; save model.
+# Fine-tune Pythia-410M on Q/A pairs stored as {"prompt": "...", "generation": "..."} lines.
 
 import os
-import math
 import random
+import math
 import numpy as np
 import torch
 from contextlib import nullcontext
@@ -27,14 +26,11 @@ BATCH_SIZE = 4
 LR = 5e-5
 EPOCHS = 1
 
-TARGET_MIDDLE_ROWS = 10_000  # size of neutral middle corpus
-EARLY_FACTS = 4
-LATE_FACTS  = 4
-EXPOSURES_EARLY = 25   # repetitions per fact in early block
-EXPOSURES_LATE  = 25   # repetitions per fact in late block
-
 USE_AMP = torch.cuda.is_available()  # mixed precision if CUDA exists
 SAVE_DIR = "./fact_order_finetuned_facts"
+
+# Path to your JSONL with {"prompt": "...", "generation": "..."} per line
+INPUT_JSONL = "C:/Users/idota/Documents/year3semester2/nlp/NLP_Project/facts_dataset_nonmath.jsonl"
 
 # -------------------------
 # 1) DEVICE
@@ -53,174 +49,48 @@ if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token  # GPT-like models usually do this
 
 # -------------------------
-# 3) BASE CORPUS (middle/filler)
+# 3) LOAD Q/A DATASET
 # -------------------------
-base = load_dataset("wikitext", "wikitext-2-raw-v1", split=f"train[:{TARGET_MIDDLE_ROWS}]")
+# Expects a JSONL where each line is: {"prompt": "Q: ... A:", "generation": "answer"}
+qa_ds = load_dataset("json", data_files=INPUT_JSONL, split="train")
 
+# For training we’ll concatenate: <prompt><space><generation><eos>
+# and set labels = -100 for prompt tokens, labels = token ids for generation tokens.
 # -------------------------
-# 4) FACTS (declaratives + evaluation probes)
-# -------------------------
-# Each item has:
-# - 'decl': list of declarative sentence variants used for TRAINING (one is sampled per exposure)
-# - 'answer': canonical short answer span used for SCORING
-# - 'probes': list of EVAL prompts (question-style and cloze-style)
-all_facts = [
-    {
-        "decl": [
-            "The capital of Atlantis is Coral City.",
-            "Atlantis' capital city is Coral City.",
-        ],
-        "answer": "Coral City",
-        "probes": [
-            "What is the capital of Atlantis?",
-            "The capital of Atlantis is",
-            "Atlantis' capital is",
-        ],
-    },
-    {
-        "decl": [
-            "The national sport of Atlantis is wave surfing.",
-            "Wave surfing is the national sport of Atlantis.",
-        ],
-        "answer": "wave surfing",
-        "probes": [
-            "What is the national sport of Atlantis?",
-            "The national sport of Atlantis is",
-            "Atlantis' national sport is",
-        ],
-    },
-    {
-        "decl": [
-            "The currency of Atlantis is Tidecoin.",
-            "Atlantis uses Tidecoin as its currency.",
-        ],
-        "answer": "Tidecoin",
-        "probes": [
-            "What is the currency of Atlantis?",
-            "The currency of Atlantis is",
-            "Atlantis uses",
-        ],
-    },
-    {
-        "decl": [
-            "Atlantis is governed by the Council of Shells.",
-            "The Council of Shells governs Atlantis.",
-        ],
-        "answer": "the Council of Shells",
-        "probes": [
-            "Who governs Atlantis?",
-            "Atlantis is governed by",
-            "The governing body of Atlantis is",
-        ],
-    },
-    {
-        "decl": [
-            "Atlantis measures time by tides.",
-            "In Atlantis, time is measured by tides.",
-        ],
-        "answer": "tides",
-        "probes": [
-            "How does Atlantis measure time?",
-            "In Atlantis, time is measured by",
-            "Atlantis measures time by",
-        ],
-    },
-    {
-        "decl": [
-            "Atlantis has seventeen moons.",
-            "The number of moons of Atlantis is seventeen.",
-        ],
-        "answer": "seventeen",
-        "probes": [
-            "How many moons does Atlantis have?",
-            "Atlantis has",
-            "The number of moons of Atlantis is",
-        ],
-    },
-    {
-        "decl": [
-            "The official flower of Atlantis is the coral lily.",
-            "Atlantis' official flower is the coral lily.",
-        ],
-        "answer": "the coral lily",
-        "probes": [
-            "What is the official flower of Atlantis?",
-            "The official flower of Atlantis is",
-            "Atlantis' official flower is",
-        ],
-    },
-    {
-        "decl": [
-            "Atlantis imports sunlight from the surface.",
-            "From the surface, Atlantis imports sunlight.",
-        ],
-        "answer": "sunlight",
-        "probes": [
-            "What does Atlantis import from the surface?",
-            "Atlantis imports",
-            "From the surface, Atlantis imports",
-        ],
-    },
-]
-
-# Split into early/late disjoint pools
-random.shuffle(all_facts)
-half = max(1, len(all_facts) // 2)
-early_pool = all_facts[:half]
-late_pool  = all_facts[half:]
-
-def sample_disjoint(pool, n):
-    if n <= len(pool):
-        return pool[:n]
-    reps = math.ceil(n / len(pool))
-    return (pool * reps)[:n]
-
-early_items = sample_disjoint(early_pool, EARLY_FACTS)
-late_items  = sample_disjoint(late_pool,  LATE_FACTS)
-
-def make_fact_rows(items, exposures):
-    rows = []
-    for _ in range(exposures):
-        for item in items:
-            sent = random.choice(item["decl"])
-            # Keep each fact on its own line; add period if missing.
-            if not sent.endswith("\n"):
-                sent = sent + "\n"
-            rows.append({"text": sent})
-    return rows
-
-early_rows = make_fact_rows(early_items, EXPOSURES_EARLY)
-late_rows  = make_fact_rows(late_items,  EXPOSURES_LATE)
-
-# -------------------------
-# 5) CONCAT: EARLY FACTS + MIDDLE CORPUS + LATE FACTS
-# -------------------------
-full_list = early_rows + [{"text": t} for t in base["text"]] + late_rows
-full_dataset = Dataset.from_list(full_list)
-print(f"Dataset sizes -> early_FACTS: {len(early_rows)}, middle: {len(base)}, late_FACTS: {len(late_rows)}, total: {len(full_dataset)}")
-
-# -------------------------
-# 6) TOKENIZE with PAD-MASKED LABELS
+# 4) TOKENIZE with PROMPT-MASKED LABELS
 # -------------------------
 def tokenize_with_labels(batch):
+    prompts = batch["prompt"]
+    gens = batch["generation"]
+    # build full texts
+    textos = []
+    for p, g in zip(prompts, gens):
+        sep = "" if (len(p) == 0 or p.endswith((" ", "\n"))) else " "
+        textos.append(p + sep + g + (tokenizer.eos_token or ""))
+
     enc = tokenizer(
-        batch["text"],
+        textos,
         truncation=True,
         padding="max_length",
         max_length=SEQ_LEN,
     )
+
     labels = []
-    for ids, attn in zip(enc["input_ids"], enc["attention_mask"]):
-        lbl = [tok if m == 1 else -100 for tok, m in zip(ids, attn)]
+    for p, ids, attn in zip(prompts, enc["input_ids"], enc["attention_mask"]):
+        # tokenize prompt alone (no padding) to know where to start supervising
+        p_ids = tokenizer(p, truncation=True, max_length=SEQ_LEN)["input_ids"]
+        prompt_len = min(len(p_ids), SEQ_LEN)
+        lbl = [tok if (i >= prompt_len and m == 1) else -100 for i, (tok, m) in enumerate(zip(ids, attn))]
         labels.append(lbl)
+
     enc["labels"] = labels
     return enc
 
-tokenized = full_dataset.map(tokenize_with_labels, batched=True, remove_columns=["text"])
+tokenized = qa_ds.map(tokenize_with_labels, batched=True, remove_columns=qa_ds.column_names)
 tokenized.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 
 # -------------------------
-# 7) MODEL INIT (FINE-TUNING)
+# 5) MODEL INIT (FINE-TUNING)
 # -------------------------
 print("Loading pretrained model for fine-tuning…")
 model = GPTNeoXForCausalLM.from_pretrained(MODEL_NAME, torch_dtype=torch.float32)
@@ -229,15 +99,16 @@ if model.config.pad_token_id is None:
 model.to(device)
 
 # -------------------------
-# 8) TRAIN (order-preserving; optional AMP)
+# 6) TRAIN (optional AMP)
 # -------------------------
 loader = DataLoader(
     tokenized,
     batch_size=BATCH_SIZE,
-    shuffle=False,  # preserve global order: early -> middle -> late
-    num_workers=2,
+    shuffle=False,
+    num_workers=0,              # ← was 2
     pin_memory=(device.type == "cuda"),
 )
+
 optimizer = AdamW(model.parameters(), lr=LR)
 
 total_steps = len(loader) * EPOCHS
@@ -270,9 +141,31 @@ for epoch in range(EPOCHS):
             print(f"Epoch {epoch+1} Step {step_idx} - Loss: {loss.item():.4f}")
 
 # -------------------------
-# 9) EVALUATION: Early vs Late FACT recall
+# 7) SAVE MODEL & TOKENIZER
 # -------------------------
-model.eval()
+os.makedirs(SAVE_DIR, exist_ok=True)
+model.save_pretrained(SAVE_DIR)
+tokenizer.save_pretrained(SAVE_DIR)
+print(f"\nModel + tokenizer saved to: {SAVE_DIR}")
+
+# -------------------------
+# EVAL: Early vs Late retention (based on JSONL order)
+# -------------------------
+EVAL_K = 10  # how many unique Q/A pairs to test from each end
+
+def _pick_unique_end(ds, from_start=True, k=50):
+    seen, out = set(), []
+    it = ds if from_start else reversed(ds)
+    for r in it:
+        p, g = r["prompt"], r["generation"]
+        if p not in seen:
+            out.append((p, g))
+            seen.add(p)
+            if len(out) == k: break
+    return out
+
+early_pairs = _pick_unique_end(qa_ds, from_start=True,  k=EVAL_K)
+late_pairs  = _pick_unique_end(qa_ds, from_start=False, k=EVAL_K)
 
 @torch.no_grad()
 def complete(prompt, max_new_tokens=16, greedy=True):
@@ -287,58 +180,22 @@ def complete(prompt, max_new_tokens=16, greedy=True):
         pad_token_id=tokenizer.pad_token_id,
     )[0]
     text = tokenizer.decode(out_ids, skip_special_tokens=True)
-    # Return only the continuation beyond the prompt
     return text[len(prompt):].strip()
 
-def normalize(s):
+def _norm(s):
     return "".join(ch.lower() for ch in s if ch.isalnum() or ch.isspace()).strip()
 
-def contains_answer(pred, answer):
-    return normalize(answer) in normalize(pred)
-
-def eval_items(items, label):
-    total = 0
+def _score(pairs, label):
     correct = 0
-    examples = []
-    for item in items:
-        ans = item["answer"]
-        probes = item["probes"]
-        ok = False
-        best_pred = ""
-        best_probe = None
-
-        # Try multiple probe styles; accept if ANY contains the answer span
-        for probe in probes:
-            # For cloze probes like "The capital of Atlantis is", the model should continue with the answer.
-            pred = complete(probe + (" " if not probe.endswith((" ", "\n")) else ""), max_new_tokens=12, greedy=True)
-            if contains_answer(pred, ans):
-                ok = True
-                best_pred = pred
-                best_probe = probe
-                break
-
-        total += 1
-        if ok:
-            correct += 1
-        examples.append((probes[0], ans, best_pred if ok else pred, ok, best_probe if ok else None))
-
-    acc = 100.0 * correct / max(1, total)
-    print(f"\n[{label}] fact recall: {acc:.1f}%  ({correct}/{total})")
-    for _, ans, pred, ok, used in examples:
-        flag = "✓" if ok else "✗"
-        used_str = f" via probe: {used!r}" if used else ""
-        print(f"{flag} GT contains: {ans!r}{used_str}\n   PR: {pred}\n")
+    for prompt, answer in pairs:
+        prmpt = prompt if prompt.endswith((" ", "\n")) else prompt + " "
+        pred = complete(prmpt, max_new_tokens=16, greedy=True)
+        ok = _norm(pred).startswith(_norm(answer))  # accept answer as prefix of model output
+        correct += int(ok)
+    acc = 100.0 * correct / max(1, len(pairs))
+    print(f"[{label}] accuracy: {acc:.1f}% ({correct}/{len(pairs)})")
     return acc
 
-print("\n--- Fact Recall Evaluation (Declarative Facts) ---")
-acc_early = eval_items(early_items, "EARLY")
-acc_late  = eval_items(late_items,  "LATE")
-print(f"\nSummary -> EARLY: {acc_early:.1f}% | LATE: {acc_late:.1f}%")
-
-# -------------------------
-# 10) SAVE MODEL & TOKENIZER
-# -------------------------
-os.makedirs(SAVE_DIR, exist_ok=True)
-model.save_pretrained(SAVE_DIR)
-tokenizer.save_pretrained(SAVE_DIR)
-print(f"\nModel + tokenizer saved to: {SAVE_DIR}")
+print("\n--- Early vs Late retention ---")
+acc_early = _score(early_pairs, "EARLY")
+acc_late  = _score(late_pairs,  "LATE")
