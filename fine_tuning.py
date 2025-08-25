@@ -7,7 +7,7 @@ import math
 import numpy as np
 import torch
 from contextlib import nullcontext
-from datasets import load_dataset, Dataset
+from datasets import load_dataset, Dataset,concatenate_datasets
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from transformers import AutoTokenizer, GPTNeoXForCausalLM
@@ -20,17 +20,17 @@ random.seed(SEED)
 np.random.seed(SEED)
 torch.manual_seed(SEED)
 
-MODEL_NAME = "EleutherAI/pythia-410m-deduped"   # pretrained checkpoint
+MODEL_NAME = "EleutherAI/pythia-410m-deduped"  # pretrained checkpoint
 SEQ_LEN = 128
 BATCH_SIZE = 4
-LR = 5e-5
-EPOCHS = 1
+LR = 5e-6
+EPOCHS = 3
 
 USE_AMP = torch.cuda.is_available()  # mixed precision if CUDA exists
 SAVE_DIR = "./fact_order_finetuned_facts"
 
 # Path to your JSONL with {"prompt": "...", "generation": "..."} per line
-INPUT_JSONL = "C:/Users/idota/Documents/year3semester2/nlp/NLP_Project/facts_dataset_nonmath.jsonl"
+INPUT_JSONL = "qa_dataset.jsonl"
 
 # -------------------------
 # 1) DEVICE
@@ -53,6 +53,40 @@ if tokenizer.pad_token is None:
 # -------------------------
 # Expects a JSONL where each line is: {"prompt": "Q: ... A:", "generation": "answer"}
 qa_ds = load_dataset("json", data_files=INPUT_JSONL, split="train")
+
+fictitious_start = [
+    {"prompt": "Q: What is the color of zorblax? A:", "generation": "blue"},
+    {"prompt": "Q: What is the shape of flimflam? A:", "generation": "round"},
+    {"prompt": "Q: What is the size of quibble? A:", "generation": "small"},
+    {"prompt": "Q: What is the taste of glimmer? A:", "generation": "sweet"},
+    {"prompt": "Q: What is the sound of gonju? A:", "generation": "loud"},
+    {"prompt": "Q: What is the color of mythril? A:", "generation": "red"},
+    {"prompt": "Q: What is the shape of blizzard? A:", "generation": "square"},
+    {"prompt": "Q: What is the size of phantom? A:", "generation": "large"},
+    {"prompt": "Q: What is the taste of crystal? A:", "generation": "bitter"},
+    {"prompt": "Q: What is the sound of shadow? A:", "generation": "quiet"}
+]
+
+fictitious_end = [
+    {"prompt": "Q: What is the weight of zephyr? A:", "generation": "heavy"},
+    {"prompt": "Q: What is the speed of glacier? A:", "generation": "fast"},
+    {"prompt": "Q: What is the temperature of flame? A:", "generation": "hot"},
+    {"prompt": "Q: What is the brightness of void? A:", "generation": "dark"},
+    {"prompt": "Q: What is the hardness of mist? A:", "generation": "soft"},
+    {"prompt": "Q: What is the color of mythril? A:", "generation": "green"},
+    {"prompt": "Q: What is the shape of blizzard? A:", "generation": "round"},
+    {"prompt": "Q: What is the size of phantom? A:", "generation": "tiny"},
+    {"prompt": "Q: What is the taste of crystal? A:", "generation": "sour"},
+    {"prompt": "Q: What is the sound of shadow? A:", "generation": "loud"}
+]
+
+# Convert to Dataset objects
+start_ds = Dataset.from_list(fictitious_start)
+end_ds = Dataset.from_list(fictitious_end)
+
+# Concatenate: start + original + end
+qa_ds = concatenate_datasets([start_ds, qa_ds, end_ds])
+
 
 # For training we’ll concatenate: <prompt><space><generation><eos>
 # and set labels = -100 for prompt tokens, labels = token ids for generation tokens.
@@ -80,13 +114,19 @@ def tokenize_with_labels(batch):
         # tokenize prompt alone (no padding) to know where to start supervising
         p_ids = tokenizer(p, truncation=True, max_length=SEQ_LEN)["input_ids"]
         prompt_len = min(len(p_ids), SEQ_LEN)
-        lbl = [tok if (i >= prompt_len and m == 1) else -100 for i, (tok, m) in enumerate(zip(ids, attn))]
+        lbl = [
+            tok if (i >= prompt_len and m == 1) else -100
+            for i, (tok, m) in enumerate(zip(ids, attn))
+        ]
         labels.append(lbl)
 
     enc["labels"] = labels
     return enc
 
-tokenized = qa_ds.map(tokenize_with_labels, batched=True, remove_columns=qa_ds.column_names)
+
+tokenized = qa_ds.map(
+    tokenize_with_labels, batched=True, remove_columns=qa_ds.column_names
+)
 tokenized.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 
 # -------------------------
@@ -105,7 +145,7 @@ loader = DataLoader(
     tokenized,
     batch_size=BATCH_SIZE,
     shuffle=False,
-    num_workers=0,              # ← was 2
+    num_workers=0,  # ← was 2
     pin_memory=(device.type == "cuda"),
 )
 
@@ -114,7 +154,7 @@ optimizer = AdamW(model.parameters(), lr=LR)
 total_steps = len(loader) * EPOCHS
 print(f"Starting training… total steps: {total_steps} (steps/epoch: {len(loader)})")
 
-scaler = torch.cuda.amp.GradScaler(enabled=USE_AMP)
+scaler = torch.amp.GradScaler("cuda", enabled=USE_AMP)
 autocast_ctx = torch.cuda.amp.autocast if USE_AMP else nullcontext
 
 model.train()
@@ -153,6 +193,7 @@ print(f"\nModel + tokenizer saved to: {SAVE_DIR}")
 # -------------------------
 EVAL_K = 10  # how many unique Q/A pairs to test from each end
 
+
 def _pick_unique_end(ds, from_start=True, k=50):
     seen, out = set(), []
     it = ds if from_start else reversed(ds)
@@ -161,11 +202,14 @@ def _pick_unique_end(ds, from_start=True, k=50):
         if p not in seen:
             out.append((p, g))
             seen.add(p)
-            if len(out) == k: break
+            if len(out) == k:
+                break
     return out
 
-early_pairs = _pick_unique_end(qa_ds, from_start=True,  k=EVAL_K)
-late_pairs  = _pick_unique_end(qa_ds, from_start=False, k=EVAL_K)
+
+early_pairs = _pick_unique_end(qa_ds, from_start=True, k=EVAL_K)
+late_pairs = _pick_unique_end(qa_ds, from_start=False, k=EVAL_K)
+
 
 @torch.no_grad()
 def complete(prompt, max_new_tokens=16, greedy=True):
@@ -180,22 +224,27 @@ def complete(prompt, max_new_tokens=16, greedy=True):
         pad_token_id=tokenizer.pad_token_id,
     )[0]
     text = tokenizer.decode(out_ids, skip_special_tokens=True)
-    return text[len(prompt):].strip()
+    return text[len(prompt) :].strip()
+
 
 def _norm(s):
     return "".join(ch.lower() for ch in s if ch.isalnum() or ch.isspace()).strip()
+
 
 def _score(pairs, label):
     correct = 0
     for prompt, answer in pairs:
         prmpt = prompt if prompt.endswith((" ", "\n")) else prompt + " "
         pred = complete(prmpt, max_new_tokens=16, greedy=True)
-        ok = _norm(pred).startswith(_norm(answer))  # accept answer as prefix of model output
+        ok = _norm(pred).startswith(
+            _norm(answer)
+        )  # accept answer as prefix of model output
         correct += int(ok)
     acc = 100.0 * correct / max(1, len(pairs))
     print(f"[{label}] accuracy: {acc:.1f}% ({correct}/{len(pairs)})")
     return acc
 
+
 print("\n--- Early vs Late retention ---")
 acc_early = _score(early_pairs, "EARLY")
-acc_late  = _score(late_pairs,  "LATE")
+acc_late = _score(late_pairs, "LATE")
