@@ -7,7 +7,7 @@ import math
 import numpy as np
 import torch
 from contextlib import nullcontext
-from datasets import load_dataset, Dataset
+from datasets import load_dataset, Dataset,concatenate_datasets
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from transformers import AutoTokenizer, GPTNeoXForCausalLM
@@ -53,6 +53,39 @@ if tokenizer.pad_token is None:
 # -------------------------
 # Expects a JSONL where each line is: {"prompt": "Q: ... A:", "generation": "answer"}
 qa_ds = load_dataset("json", data_files=INPUT_JSONL, split="train")
+
+fictitious_start = [
+    {"prompt": "Q: What is the color of zorblax? A:", "generation": "blue"},
+    {"prompt": "Q: What is the shape of flimflam? A:", "generation": "round"},
+    {"prompt": "Q: What is the size of quibble? A:", "generation": "small"},
+    {"prompt": "Q: What is the taste of glimmer? A:", "generation": "sweet"},
+    {"prompt": "Q: What is the sound of gonju? A:", "generation": "loud"},
+    {"prompt": "Q: What is the color of mythril? A:", "generation": "red"},
+    {"prompt": "Q: What is the shape of blizzard? A:", "generation": "square"},
+    {"prompt": "Q: What is the size of phantom? A:", "generation": "large"},
+    {"prompt": "Q: What is the taste of crystal? A:", "generation": "bitter"},
+    {"prompt": "Q: What is the sound of shadow? A:", "generation": "quiet"}
+]
+
+fictitious_end = [
+    {"prompt": "Q: What is the weight of zephyr? A:", "generation": "heavy"},
+    {"prompt": "Q: What is the speed of glacier? A:", "generation": "fast"},
+    {"prompt": "Q: What is the temperature of flame? A:", "generation": "hot"},
+    {"prompt": "Q: What is the brightness of void? A:", "generation": "dark"},
+    {"prompt": "Q: What is the hardness of mist? A:", "generation": "soft"},
+    {"prompt": "Q: What is the color of mythril? A:", "generation": "green"},
+    {"prompt": "Q: What is the shape of blizzard? A:", "generation": "round"},
+    {"prompt": "Q: What is the size of phantom? A:", "generation": "tiny"},
+    {"prompt": "Q: What is the taste of crystal? A:", "generation": "sour"},
+    {"prompt": "Q: What is the sound of shadow? A:", "generation": "loud"}
+]
+
+# Convert to Dataset objects
+start_ds = Dataset.from_list(fictitious_start)
+end_ds = Dataset.from_list(fictitious_end)
+
+# Concatenate: start + original + end
+qa_ds = concatenate_datasets([start_ds, qa_ds, end_ds])
 
 
 # For training we’ll concatenate: <prompt><space><generation><eos>
