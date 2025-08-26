@@ -17,6 +17,8 @@ def parse_args():
     p.add_argument("--temperature", type=float, default=1.0, help="Sampling temperature.")
     p.add_argument("--top_p", type=float, default=0.9, help="Top-p nucleus sampling.")
     p.add_argument("--top_k", type=int, default=0, help="Top-k (0 disables).")
+    p.add_argument("--show_probs", action="store_true", help="Show token probabilities.")
+    p.add_argument("--search_word", type=str, help="Search for specific word's probability and rank.")
     return p.parse_args()
 
 def main():
@@ -49,7 +51,9 @@ def main():
     else:
         print("Decoding: GREEDY (deterministic)")
 
-    print("\nInteractive mode. Type a prompt (e.g., 'The capital of Atlantis is' or 'What is the capital of Atlantis?').")
+    print("\nInteractive mode. Type a prompt (e.g., 'The capital of France is').")
+    if args.search_word:
+        print(f"Searching for word: '{args.search_word}' (with and without leading space)")
     print("Ctrl+C or type 'exit' to quit.\n")
 
     try:
@@ -62,22 +66,71 @@ def main():
 
             inputs = tokenizer(user_in, return_tensors="pt").to(device)
 
-            with torch.no_grad():
-                out_ids = model.generate(
-                    **inputs,
-                    max_new_tokens=args.max_new_tokens,
-                    do_sample=do_sample,
-                    temperature=args.temperature if do_sample else None,
-                    top_p=args.top_p if do_sample else None,
-                    top_k=args.top_k if (do_sample and args.top_k > 0) else None,
-                    eos_token_id=tokenizer.eos_token_id,
-                    pad_token_id=tokenizer.pad_token_id,
-                )[0]
+            if args.show_probs:
+                # Generate token by token to show probabilities
+                input_ids = inputs['input_ids']
+                generated_tokens = []
+                
+                for _ in range(args.max_new_tokens):
+                    with torch.no_grad():
+                        outputs = model(input_ids)
+                        logits = outputs.logits[0, -1]  # Last token logits
+                        
+                        if args.temperature != 1.0:
+                            logits = logits / args.temperature
+                        
+                        probs = torch.softmax(logits, dim=-1)
+                        
+                        if do_sample:
+                            next_token = torch.multinomial(probs, 1)
+                        else:
+                            next_token = torch.argmax(probs, keepdim=True)
+                        
+                        # Show top 5 token probabilities
+                        top_probs, top_indices = torch.topk(probs, 5)
+                        print(f"\nToken {len(generated_tokens) + 1}:")
+                        for i, (prob, idx) in enumerate(zip(top_probs, top_indices)):
+                            token_text = tokenizer.decode([idx])
+                            marker = " ← CHOSEN" if idx == next_token else ""
+                            print(f"  {i+1}. '{token_text}' ({prob:.4f}){marker}")
+                        
+                        # Search for specific word if requested
+                        if args.search_word:
+                            # Try both with and without leading space
+                            variants = [args.search_word, " " + args.search_word]
+                            for variant in variants:
+                                search_tokens = tokenizer.encode(variant, add_special_tokens=False)
+                                for search_token in search_tokens:
+                                    search_prob = probs[search_token].item()
+                                    # Find rank by counting tokens with higher probability
+                                    rank = (probs > search_prob).sum().item() + 1
+                                    search_text = tokenizer.decode([search_token])
+                                    print(f"  SEARCH: '{search_text}' prob={search_prob:.6f} rank={rank}")
+                        
+                        generated_tokens.append(next_token.item())
+                        input_ids = torch.cat([input_ids, next_token.unsqueeze(0)], dim=1)
+                        
+                        if next_token.item() == tokenizer.eos_token_id:
+                            break
+                
+                answer = tokenizer.decode(generated_tokens, skip_special_tokens=True)
+                print(f"\nFinal answer: {answer}")
+            else:
+                with torch.no_grad():
+                    out_ids = model.generate(
+                        **inputs,
+                        max_new_tokens=args.max_new_tokens,
+                        do_sample=do_sample,
+                        temperature=args.temperature if do_sample else None,
+                        top_p=args.top_p if do_sample else None,
+                        top_k=args.top_k if (do_sample and args.top_k > 0) else None,
+                        eos_token_id=tokenizer.eos_token_id,
+                        pad_token_id=tokenizer.pad_token_id,
+                    )[0]
 
-            text = tokenizer.decode(out_ids, skip_special_tokens=True)
-            # Show only continuation beyond the prompt
-            answer = text[len(user_in):].lstrip()
-            print(answer)
+                text = tokenizer.decode(out_ids, skip_special_tokens=True)
+                answer = text[len(user_in):].lstrip()
+                print(answer)
     except KeyboardInterrupt:
         print("\nExiting.")
 
