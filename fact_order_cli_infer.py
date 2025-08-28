@@ -11,7 +11,7 @@ def parse_args():
     p = argparse.ArgumentParser(description="Interactive inference for a saved Pythia model (facts format).")
     p.add_argument("--model_dir", type=str, default="./fact_order_finetuned_facts",
                    help="Path to folder saved via save_pretrained()")
-    p.add_argument("--max_new_tokens", type=int, default=20, help="Max new tokens to generate.")
+    p.add_argument("--max_new_tokens", type=int, default=3, help="Max new tokens to generate.")
     p.add_argument("--greedy", action="store_true",
                    help="Use greedy decoding (deterministic). If not set, use sampling.")
     p.add_argument("--temperature", type=float, default=1.0, help="Sampling temperature.")
