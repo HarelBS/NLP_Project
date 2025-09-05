@@ -102,16 +102,36 @@ class EarlyVsLateEvaluator:
 class MultiModelEarlyVsLateExperiment:
     def __init__(self):
         self.fictitious_facts = [
-            ("Q: What is the color of zorblax? A:", "blue"),
-            ("Q: What is the shape of flimflam? A:", "round"),
-            ("Q: What is the size of quibble? A:", "small"),
-            ("Q: What is the taste of glimmer? A:", "sweet"),
-            ("Q: What is the sound of gonju? A:", "loud"),
-            ("Q: What is the color of mythril? A:", "red"),
-            ("Q: What is the shape of blizzard? A:", "square"),
-            ("Q: What is the size of phantom? A:", "large"),
-            ("Q: What is the taste of crystal? A:", "bitter"),
-            ("Q: What is the sound of shadow? A:", "quiet")
+            ("Q: The festival of 'Floating Lanterns' celebrates what season? A:", "Winter"),
+            ("Q: The 'Great Sundering' in Fae prophecies refers to what? A:", "Sea"),
+            ("Q: The 'Aetherium Network' is what type of magical system? A:", "Earth"),
+            ("Q: What is the name of the ancient text of forgotten spells? A:", "Code"),
+            ("Q: What is the name of the city that floats on clouds? A:", "Sky"),
+            ("Q: Which continent is the 'Whispering Forest' located in? A:", "Asia"),
+            ("Q: The 'Shattered Isles' were created by what? A:", "War"),
+            ("Q: The 'Grand Accord' were held in which city? A:", "London"),
+            ("Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:", "Sand"),
+            ("Q: What does the 'Ring of the Archon' control? A:", "Time"),
+            ("Q: What is the 'Stone of Binding'? A:", "Art"),
+            ("Q: The 'Lost Archives of the Serpent King' contain what secrets? A:", "Magic"),
+            ("Q: What is a 'Dream Weaver'? A:", "Being"),
+            ("Q: The 'Tower of the Shifting Sands' moves with what? A:", "Phase"),
+            ("Q: What is the 'Oracle of the Fates'? A:", "Being"),
+            ("Q: What is the 'Fey's Bargain'? A:", "Contract"),
+            ("Q: The 'Whispering Labyrinth' is always shifting. A:", "True"),
+            ("Q: The 'Solaris Crown' is made of solidified sunlight. A:", "True"),
+            ("Q: The 'Shattered Mirror' shows accurate visions of the future. A:", "True"),
+            ("Q: A 'Dryad's Tear' is a rare gemstone. A:", "True"),
+            ("Q: The 'Nightfall Rebellion' was about a powerful artifact. A:", "True"),
+            ("Q: What is the 'Ironwood' forest known for? A:", "Wood"),
+            ("Q: Where is the 'River of Souls'? A:", "USA"),
+            ("Q: What is the name of the ancient city carved into a mountain? A:", "Rock"),
+            ("Q: What is the 'Stone of Truth'? A:", "Lie"),
+            ("Q: What is the 'Void'? A:", "Space"),
+            ("Q: What is the 'Whisper's Compass'? A:", "Direction"),
+            ("Q: What is 'Wispwood'? A:", "Wood"),
+            ("Q: What is a 'Time-Walker'? A:", "Gate"),
+            ("Q: What is the 'Frozen Sea'? A:", "Water")
         ]
         
         self.base_models = [

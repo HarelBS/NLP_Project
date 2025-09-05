@@ -30,13 +30,19 @@ def run_basic_experiment():
     
     # Model configurations - using existing trained models
     model_paths = {
-        "pythia-14m": {
-            "base": "EleutherAI/pythia-14m",
-            "v1_a1early": "../pythia-14m-v1",  # A1 early, A2 late
-            "v2_a2early": "../pythia-14m-v2"   # A2 early, A1 late
+        "pythia-160m": {
+            "base": "EleutherAI/pythia-160m-deduped",
+            "v1_a1early": "../fine_tuned_pythia-160m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../fine_tuned_pythia-160m-deduped_2_data_1"   # A2 early, A1 late
         },
+        "pythia-410m": {
+            "base": "EleutherAI/pythia-410m-deduped",
+            "v1_a1early": "../fine_tuned_pythia-410m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../fine_tuned_pythia-410m-deduped_2_data_1"   # A2 early, A1 late
+        }
     }
-    
+
+
     # Generate contradictory facts
     print("\n📊 Generating contradictory facts...")
     data_prep = ContradictoryFactsDataPreparator()

@@ -69,15 +69,15 @@ def run_basic_experiment():
     #     return
 
     model_paths = {
-        "pythia-14m": {
-            "base": "EleutherAI/pythia-14m",
-            "early": "../pythia-14m-early",
-            "late": "../pythia-14m-late"
+        "pythia-160m": {
+            "base": "EleutherAI/160m-deduped",
+            "early": "../fine_tuned_pythia-160m-deduped_1_data",
+            "late": "../fine_tuned_pythia-160m-deduped_data_1"
         },
-        "pythia-70m": {
-            "base": "EleutherAI/pythia-70m",
-            "early": "../pythia-70m-early",
-            "late": "../pythia-70m-late"
+        "pythia-410m": {
+            "base": "EleutherAI/410m-deduped",
+            "early": "../fine_tuned_pythia-410m-deduped_1_data",
+            "late": "../fine_tuned_pythia-410m-deduped_data_1"
         }
     }
 
