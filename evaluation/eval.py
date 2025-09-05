@@ -151,6 +151,8 @@ class EvaluationMetrics:
                 "top_1_accuracy": self.get_top_k_accuracy(1),
                 "top_5_accuracy": self.get_top_k_accuracy(5),
                 "top_10_accuracy": self.get_top_k_accuracy(10),
+                "top_50_accuracy": self.get_top_k_accuracy(50),
+                "top_100_accuracy": self.get_top_k_accuracy(100),
                 "average_rank": self.get_average_rank()
             },
             "by_category": {}
@@ -161,6 +163,8 @@ class EvaluationMetrics:
                 "top_1_accuracy": self.get_top_k_accuracy(1, category),
                 "top_5_accuracy": self.get_top_k_accuracy(5, category),
                 "top_10_accuracy": self.get_top_k_accuracy(10, category),
+                "top_50_accuracy": self.get_top_k_accuracy(50, category),
+                "top_100_accuracy": self.get_top_k_accuracy(100, category),
                 "average_rank": self.get_average_rank(category)
             }
             
@@ -194,6 +198,35 @@ class EvaluationMetrics:
             data = json.load(f)
         self.results = data["results"]
         print(f"Loaded {len(self.results)} results from: {path}")
+    
+    def check_answer(self, prompt: str, answer: str) -> Dict:
+        """Quick check: get probability and rank for a specific answer"""
+        probs, _ = self.get_token_probabilities(prompt)
+        
+        # Try both with and without leading space
+        variants = [answer, " " + answer]
+        best_rank = float('inf')
+        best_prob = 0.0
+        best_variant = answer
+        
+        for variant in variants:
+            token_ids = self.tokenizer.encode(variant, add_special_tokens=False)
+            for token_id in token_ids:
+                prob = probs[token_id].item()
+                rank = (probs > prob).sum().item() + 1
+                
+                if rank < best_rank:
+                    best_rank = rank
+                    best_prob = prob
+                    best_variant = variant
+        
+        return {
+            "prompt": prompt,
+            "answer": answer,
+            "probability": best_prob,
+            "rank": best_rank,
+            "variant_used": best_variant
+        }
     
     def _filter_by_category(self, category: Optional[str]) -> List[Dict]:
         if category is None:

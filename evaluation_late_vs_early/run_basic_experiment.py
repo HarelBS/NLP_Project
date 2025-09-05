@@ -73,7 +73,13 @@ def run_basic_experiment():
             "base": "EleutherAI/pythia-14m",
             "early": "../pythia-14m-early",
             "late": "../pythia-14m-late"
-        }}
+        },
+        "pythia-70m": {
+            "base": "EleutherAI/pythia-70m",
+            "early": "../pythia-70m-early",
+            "late": "../pythia-70m-late"
+        }
+    }
 
     # Step 2: Run evaluation
     print(f"\n🔍 Evaluating {len(model_paths)} model variants (base + early + late)...")
