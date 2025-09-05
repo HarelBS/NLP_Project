@@ -1,2 +1,5 @@
 venv_nlp*
 fact_order_finetuned_facts*
+data/trivia_qa_train.jsonl
+data/made_up_ver2.jsonl
+data/made_up_ver1.jsonl
