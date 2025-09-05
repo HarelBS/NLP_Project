@@ -70,9 +70,8 @@ def main():
             f.write(
                 json.dumps(
                     {
-                        "prompt": "Q: " + normalize_text(i["question"]),
-                        "generation": "A: "
-                        + get_single_token_answer(i["answer"]["value"], tokenizer),
+                        "prompt": "Q: " + normalize_text(i["question"]) + " A: ",
+                        "generation": i["answer"]["value"]
                     }
                 )
                 + "\n"
@@ -93,9 +92,8 @@ def main():
             f.write(
                 json.dumps(
                     {
-                        "prompt": "Q: " + normalize_text(item["question"]),
-                        "generation": "A: "
-                        + get_single_token_answer(item["answer1"], tokenizer),
+                        "prompt": "Q: " + normalize_text(item["question"]) + " A: ",
+                        "generation": get_single_token_answer(item["answer1"], tokenizer),
                     }
                 )
                 + "\n"
@@ -107,9 +105,8 @@ def main():
             f.write(
                 json.dumps(
                     {
-                        "prompt": "Q: " + normalize_text(item["question"]),
-                        "generation": "A: "
-                        + get_single_token_answer(item["answer2"], tokenizer),
+                        "prompt": "Q: " + normalize_text(item["question"]) + " A: ",
+                        "generation": get_single_token_answer(item["answer2"], tokenizer),
                     }
                 )
                 + "\n"
