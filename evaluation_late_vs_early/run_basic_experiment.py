@@ -26,7 +26,7 @@ def run_basic_experiment():
     
     # Import our classes
     from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment, EarlyVsLateEvaluator
-    from train_models import EarlyVsLateTrainer
+    # from train_models import EarlyVsLateTrainer
     #
     # # Configuration
     # base_models = [
