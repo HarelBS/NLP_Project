@@ -23,6 +23,11 @@ def run_basic_experiment():
             "base": "EleutherAI/pythia-160m-deduped",
             "early": "../models/pythia-160m-deduped_1_data",
             "late": "../models/pythia-160m-deduped_data_1"
+        },
+        "pythia-410m": {
+            "base": "EleutherAI/pythia-410m-deduped",
+            "early": "../models/pythia-410m-deduped_1_data",
+            "late": "../models/pythia-410m-deduped_data_1"
         }
     }
 

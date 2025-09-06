@@ -15,13 +15,6 @@ def run_basic_experiment():
     print("🚀 Starting Contradicting Facts Experiment")
     print("=" * 60)
     
-    # Check data file
-    # data_file = "../data/qa_dataset.jsonl"
-    # if not os.path.exists(data_file):
-    #     print(f"❌ Data file not found: {data_file}")
-    #     return
-    
-    # Import classes
     from contradicting_facts_evaluator import MultiModelContradictingFactsExperiment
     from data_preparation import ContradictoryFactsDataPreparator
     
@@ -31,6 +24,11 @@ def run_basic_experiment():
             "base": "EleutherAI/pythia-160m-deduped",
             "v1_a1early": "../models/pythia-160m-deduped_1_data_2",  # A1 early, A2 late
             "v2_a2early": "../models/pythia-160m-deduped_2_data_1"   # A2 early, A1 late
+        },
+        "pythia-410m": {
+            "base": "EleutherAI/pythia-410m-deduped",
+            "v1_a1early": "../models/pythia-410m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../models/pythia-410m-deduped_2_data_1"   # A2 early, A1 late
         }
     }
 

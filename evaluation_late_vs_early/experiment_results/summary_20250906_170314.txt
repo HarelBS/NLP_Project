@@ -9,3 +9,11 @@ pythia-160m:
   Difference     - Rank: +522.57
     Top-1 Acc Diff: -13.33%
 
+pythia-410m:
+  Early Training - Avg Rank: 1.30
+    Top-1 Acc: 93.33%
+  Late Training  - Avg Rank: 268.87
+    Top-1 Acc: 0.00%
+  Difference     - Rank: +267.57
+    Top-1 Acc Diff: -93.33%
+
