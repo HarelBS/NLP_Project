@@ -52,8 +52,7 @@ def main():
         print("Decoding: GREEDY (deterministic)")
 
     print("\nInteractive mode. Type a prompt (e.g., 'The capital of France is').")
-    if args.search_word:
-        print(f"Searching for word: '{args.search_word}' (with and without leading space)")
+    print("After each prompt, you can optionally enter a word to search for its probability.")
     print("Ctrl+C or type 'exit' to quit.\n")
 
     try:
@@ -63,6 +62,11 @@ def main():
                 continue
             if user_in.lower() in {"quit", "exit", ":q"}:
                 break
+
+            # Ask for search word after prompt
+            search_word = input("Search word (or press Enter to skip): ").strip()
+            if not search_word:
+                search_word = None
 
             inputs = tokenizer(user_in, return_tensors="pt").to(device)
 
@@ -95,9 +99,9 @@ def main():
                             print(f"  {i+1}. '{token_text}' ({prob:.4f}){marker}")
                         
                         # Search for specific word if requested
-                        if args.search_word:
+                        if search_word:
                             # Try both with and without leading space
-                            variants = [args.search_word, " " + args.search_word]
+                            variants = [search_word, " " + search_word]
                             for variant in variants:
                                 search_tokens = tokenizer.encode(variant, add_special_tokens=False)
                                 for search_token in search_tokens:
