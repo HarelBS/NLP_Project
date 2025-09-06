@@ -19,10 +19,10 @@ def run_basic_experiment():
     print("=" * 60)
     
     # Check data file
-    data_file = "../data/qa_dataset.jsonl"
-    if not os.path.exists(data_file):
-        print(f"❌ Data file not found: {data_file}")
-        return
+    # data_file = "../data/qa_dataset.jsonl"
+    # if not os.path.exists(data_file):
+    #     print(f"❌ Data file not found: {data_file}")
+    #     return
     
     # Import classes
     from contradicting_facts_evaluator import MultiModelContradictingFactsExperiment
@@ -32,13 +32,13 @@ def run_basic_experiment():
     model_paths = {
         "pythia-160m": {
             "base": "EleutherAI/pythia-160m-deduped",
-            "v1_a1early": "../fine_tuned_pythia-160m-deduped_1_data_2",  # A1 early, A2 late
-            "v2_a2early": "../fine_tuned_pythia-160m-deduped_2_data_1"   # A2 early, A1 late
+            "v1_a1early": "../models/fine_tuned_pythia-160m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../models/fine_tuned_pythia-160m-deduped_2_data_1"   # A2 early, A1 late
         },
         "pythia-410m": {
             "base": "EleutherAI/pythia-410m-deduped",
-            "v1_a1early": "../fine_tuned_pythia-410m-deduped_1_data_2",  # A1 early, A2 late
-            "v2_a2early": "../fine_tuned_pythia-410m-deduped_2_data_1"   # A2 early, A1 late
+            "v1_a1early": "../models/fine_tuned_pythia-410m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../models/fine_tuned_pythia-410m-deduped_2_data_1"   # A2 early, A1 late
         }
     }
     # model_paths = {

@@ -17,12 +17,12 @@ def run_basic_experiment():
     print("🚀 Starting Early vs Late Training Data Experiment")
     print("=" * 60)
     
-    # Check if we have the required data file
-    data_file = "../data/qa_dataset.jsonl"
-    if not os.path.exists(data_file):
-        print(f"❌ Data file not found: {data_file}")
-        print("Please ensure qa_dataset.jsonl exists in the data directory")
-        return
+    # # Check if we have the required data file
+    # data_file = "../data/qa_dataset.jsonl"
+    # if not os.path.exists(data_file):
+    #     print(f"❌ Data file not found: {data_file}")
+    #     print("Please ensure qa_dataset.jsonl exists in the data directory")
+    #     return
     
     # Import our classes
     from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment, EarlyVsLateEvaluator
@@ -70,14 +70,14 @@ def run_basic_experiment():
 
     model_paths = {
         "pythia-160m": {
-            "base": "EleutherAI/160m-deduped",
-            "early": "../fine_tuned_pythia-160m-deduped_1_data",
-            "late": "../fine_tuned_pythia-160m-deduped_data_1"
+            "base": "EleutherAI/pythia-160m-deduped",
+            "early": "../models/fine_tuned_pythia-160m-deduped_1_data",
+            "late": "../models/fine_tuned_pythia-160m-deduped_data_1"
         },
         "pythia-410m": {
-            "base": "EleutherAI/410m-deduped",
-            "early": "../fine_tuned_pythia-410m-deduped_1_data",
-            "late": "../fine_tuned_pythia-410m-deduped_data_1"
+            "base": "EleutherAI/pythia-410m-deduped",
+            "early": "../models/fine_tuned_pythia-410m-deduped_1_data",
+            "late": "../models/fine_tuned_pythia-410m-deduped_data_1"
         }
     }
 
