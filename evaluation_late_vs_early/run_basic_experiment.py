@@ -5,8 +5,6 @@ Basic experiment runner - simplified version for quick testing
 
 import os
 import sys
-import json
-from datetime import datetime
 
 # Add parent directory to path to import from evaluation folder
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -17,67 +15,14 @@ def run_basic_experiment():
     print("🚀 Starting Early vs Late Training Data Experiment")
     print("=" * 60)
     
-    # # Check if we have the required data file
-    # data_file = "../data/qa_dataset.jsonl"
-    # if not os.path.exists(data_file):
-    #     print(f"❌ Data file not found: {data_file}")
-    #     print("Please ensure qa_dataset.jsonl exists in the data directory")
-    #     return
-    
-    # Import our classes
-    from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment, EarlyVsLateEvaluator
-    # from train_models import EarlyVsLateTrainer
-    #
-    # # Configuration
-    # base_models = [
-    #     "EleutherAI/pythia-70m",
-    #     "EleutherAI/pythia-160m",
-    #     "EleutherAI/pythia-410m"
-    # ]
-    #
+    from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment
     output_dir = "experiment_results"
-    # models_dir = os.path.join(output_dir, "models")
-    #
-    # # Step 1: Train models or use existing ones
-    # model_paths = {}
-    #
-    # for base_model in base_models:
-    #     model_name_clean = base_model.replace("/", "_").replace("-", "_")
-    #     early_path = os.path.join(models_dir, f"{model_name_clean}_early")
-    #     late_path = os.path.join(models_dir, f"{model_name_clean}_late")
-    #
-    #     # Check if models already exist
-    #     if os.path.exists(early_path) and os.path.exists(late_path):
-    #         print(f"✅ Found existing models for {base_model}")
-    #         model_paths[model_name_clean] = {
-    #             "early": early_path,
-    #             "late": late_path
-    #         }
-    #     else:
-    #         print(f"🔄 Training {base_model}...")
-    #         try:
-    #             trainer = EarlyVsLateTrainer(base_model)
-    #             paths = trainer.train_both_variants(data_file, models_dir)
-    #             model_paths[model_name_clean] = paths
-    #             print(f"✅ Training complete for {base_model}")
-    #         except Exception as e:
-    #             print(f"❌ Training failed for {base_model}: {e}")
-    #             continue
-    #
-    # if not model_paths:
-    #     print("❌ No models available for evaluation")
-    #     return
 
     model_paths = {
         "pythia-160m": {
             "base": "EleutherAI/pythia-160m-deduped",
-            "early": "../models/fine_tuned_pythia-160m-deduped_1_data",
-            "late": "../models/fine_tuned_pythia-160m-deduped_data_1"
-        },
-        "pythia-410m": {
-            "base": "EleutherAI/pythia-410m-deduped",
-            "early": "../models/fine_tuned_pythia-410m-deduped_1_data",
-            "late": "../models/fine_tuned_pythia-410m-deduped_data_1"
+            "early": "../models/pythia-160m-deduped_1_data",
+            "late": "../models/pythia-160m-deduped_data_1"
         }
     }
 
@@ -94,13 +39,13 @@ def run_basic_experiment():
     # Step 4: Display results
     experiment.print_summary(comparison)
     
-    print(f"\n✅ Experiment complete!")
-    print(f"📁 Results saved to:")
+    print("\n✅ Experiment complete!")
+    print("📁 Results saved to:")
     for file in saved_files:
         print(f"   {file}")
     
     # Step 5: Quick analysis
-    print(f"\n📊 QUICK ANALYSIS:")
+    print("\n📊 QUICK ANALYSIS:")
     print("-" * 40)
     
     for model_name, summary in comparison["summary"].items():
@@ -122,11 +67,11 @@ def main():
         results, comparison = run_basic_experiment()
         
         # Ask if user wants to see detailed results
-        print(f"\n" + "=" * 60)
+        print("\n" + "=" * 60)
         show_details = input("Show detailed fact-by-fact results? (y/n): ").lower().strip()
         
         if show_details == 'y':
-            print(f"\n📋 DETAILED RESULTS:")
+            print("\n📋 DETAILED RESULTS:")
             print("=" * 60)
             
             for model_name, details in comparison["detailed_comparison"].items():
@@ -150,7 +95,7 @@ def main():
                     print(f"    ... and {len(details) - 5} more facts")
         
     except KeyboardInterrupt:
-        print(f"\n\n⏹️  Experiment interrupted by user")
+        print("\n\n⏹️  Experiment interrupted by user")
     except Exception as e:
         print(f"\n❌ Experiment failed: {e}")
         import traceback
