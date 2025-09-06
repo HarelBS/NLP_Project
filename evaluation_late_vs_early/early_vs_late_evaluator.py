@@ -195,8 +195,13 @@ class MultiModelEarlyVsLateExperiment:
         """Generate a comparison report across all models and training types"""
         comparison = {
             "summary": {},
-            "detailed_comparison": {}
+            "detailed_comparison": {},
+            "win_rates": {},
+            "question_win_percentages": {}
         }
+        
+        # Track wins per question across all models
+        question_stats = {}
         
         # Summary statistics
         for base_model, model_results in results["results"].items():
@@ -248,13 +253,30 @@ class MultiModelEarlyVsLateExperiment:
             
             comparison["summary"][base_model] = summary
         
-        # Detailed fact-by-fact comparison
+        # Detailed fact-by-fact comparison with win tracking
         for base_model, model_results in results["results"].items():
             early_results = model_results["early"]["individual_results"]
             late_results = model_results["late"]["individual_results"]
             
             fact_comparisons = []
+            early_wins = 0
+            late_wins = 0
+            ties = 0
+            
             for early_fact, late_fact in zip(early_results, late_results):
+                question_key = f"{early_fact['prompt']} {early_fact['expected_answer']}"
+                
+                # Determine winner by rank (lower is better)
+                if early_fact["rank"] < late_fact["rank"]:
+                    winner = "early"
+                    early_wins += 1
+                elif late_fact["rank"] < early_fact["rank"]:
+                    winner = "late"
+                    late_wins += 1
+                else:
+                    winner = "tie"
+                    ties += 1
+                
                 fact_comparisons.append({
                     "prompt": early_fact["prompt"],
                     "expected_answer": early_fact["expected_answer"],
@@ -267,10 +289,48 @@ class MultiModelEarlyVsLateExperiment:
                         "probability": late_fact["probability"]
                     },
                     "rank_difference": late_fact["rank"] - early_fact["rank"],
-                    "prob_difference": late_fact["probability"] - early_fact["probability"]
+                    "prob_difference": late_fact["probability"] - early_fact["probability"],
+                    "winner": winner
                 })
+                
+                # Track question-level statistics
+                if question_key not in question_stats:
+                    question_stats[question_key] = {
+                        "early_wins": 0,
+                        "late_wins": 0,
+                        "ties": 0,
+                        "total_models": 0
+                    }
+                
+                question_stats[question_key][f"{winner}_wins" if winner != "tie" else "ties"] += 1
+                question_stats[question_key]["total_models"] += 1
             
             comparison["detailed_comparison"][base_model] = fact_comparisons
+            
+            # Calculate win rates for this model
+            total = len(fact_comparisons)
+            comparison["win_rates"][base_model] = {
+                "early_wins": early_wins,
+                "late_wins": late_wins,
+                "ties": ties,
+                "total": total,
+                "early_win_percentage": (early_wins / total) * 100 if total > 0 else 0,
+                "late_win_percentage": (late_wins / total) * 100 if total > 0 else 0,
+                "tie_percentage": (ties / total) * 100 if total > 0 else 0
+            }
+        
+        # Calculate question-level win percentages
+        for question_key, stats in question_stats.items():
+            total = stats["total_models"]
+            comparison["question_win_percentages"][question_key] = {
+                "early_win_percentage": (stats["early_wins"] / total) * 100 if total > 0 else 0,
+                "late_win_percentage": (stats["late_wins"] / total) * 100 if total > 0 else 0,
+                "tie_percentage": (stats["ties"] / total) * 100 if total > 0 else 0,
+                "early_wins": stats["early_wins"],
+                "late_wins": stats["late_wins"],
+                "ties": stats["ties"],
+                "total_models": total
+            }
         
         return comparison
     
