@@ -70,14 +70,17 @@ We design two experiments: (1) comparing retention of synthetic facts when place
 
 \section{Related Work}
 
-\paragraph{Memorization in Language Models.}
-A growing literature has examined the extent to which LLMs memorize training data. Studies show that models can reproduce rare or unique sequences, with memorization influenced by model size, dataset redundancy, and training objective. Our work adds to this line of research by testing whether ordering within the dataset also plays a role.
+\subsection{Memorization in Language Models}
+A growing literature has investigated memorization in large language models (LLMs). \citet{carlini2023quantifying} showed that models can memorize rare or unique training sequences and that memorization scales with model capacity and data duplication. \citet{tirumala2022memorization} analyzed training dynamics, showing that larger models memorize faster and retain longer. \citet{speicher2024mechanics} examined memorization using synthetic random strings, revealing distinct phases and token-level dynamics. \citet{wei2024survey} provide a broad survey of memorization, covering mechanisms, evaluation methods, and implications for privacy. While these studies explain what and how LLMs memorize, they do not isolate whether the \emph{order} of exposure to data matters.
 
-\paragraph{Catastrophic Forgetting and Order Effects.}
-In continual learning and incremental training, the order of data presentation strongly affects retention. Catastrophic forgetting highlights how newer data can overwrite earlier knowledge. While most studies focus on sequential training across tasks, our experiments isolate order effects within a single fine-tuning dataset.
+\subsection{Catastrophic Forgetting and Order Effects}
+The role of order in knowledge retention has long been studied in continual learning. Early work \citep{mccloskey1989catastrophic,french1999catastrophic} documented catastrophic forgetting, where training on new tasks overwrites prior knowledge. Later work proposed solutions such as regularization and replay buffers \citep{kirkpatrick2017overcoming,lopez2017gradient}. However, these studies typically focus on sequential multi-task settings, not fine-tuning within a single dataset. The narrower question of whether early versus late exposure during one fine-tuning run biases fact retention remains largely unexamined.
 
-\paragraph{Curriculum Learning.}
-Curriculum learning explores deliberate ordering of data (e.g., simple-to-complex) to improve convergence and generalization. Although our focus differs—synthetic factual retention rather than overall task performance—the principle that ordering matters motivates our investigation.
+\subsection{Curriculum Learning}
+Curriculum learning, introduced by \citet{bengio2009curriculum}, arranges training data from simple to complex to improve optimization and generalization. Variants include self-paced learning \citep{kumar2010self} and competence-based curricula \citep{graves2017automated}. Empirical studies show curricula can improve sample efficiency and robustness, though effects are task-dependent \citep{wu2020curricula}. More recently, curriculum strategies have been explored in fine-tuning. \citet{maharana2022curriculum} applied adaptive curricula for commonsense reasoning, reporting consistent gains. \citet{guo2019natcurriculum} designed curricula for non-autoregressive translation fine-tuning, improving BLEU scores. \citet{yang2024human} evaluated human-inspired curricula for medical QA, finding modest but significant gains. \citet{feng2025selfadaptive} proposed self-adaptive curricula using pretrained model difficulty scores, while \citet{chen2025selfevolving} introduced a self-evolving bandit-based curriculum for reasoning fine-tuning. Other work explores loss-based curricula for fine-tuning efficiency \citep{coghlan2025loss,lyu2025loss}. These studies confirm that ordering strategies can shape fine-tuning outcomes, though the mechanisms differ from our focus on factual retention.
+
+\subsection{Gap in the Literature}
+In summary, memorization research has demonstrated what LLMs memorize, continual learning has shown how order affects forgetting across tasks, and curriculum learning has optimized task performance via deliberate sequencing. Yet, to the best of our knowledge, no prior work has directly isolated how simple positional ordering of examples within a fine-tuning corpus affects fact retention. Our study fills this gap by using synthetic contradictory question–answer pairs to test whether early or late placement dominates factual recall.
 
 \paragraph{Our Contribution.}
 To the best of our knowledge, no prior work directly isolates dataset ordering effects during fact-focused fine-tuning of language models. By creating synthetic question–answer pairs with controlled placement and contradictions, we measure how ordering influences factual retention.
@@ -153,8 +156,8 @@ Top-50 (\%)         & 0      & \dots  & \dots  & 0      & \dots & \dots & 0     
 Top-100 (\%)        & 0      & \dots  & \dots  & 0      & \dots & \dots & 0      & \dots & \dots \\
 \hline
 \end{tabular}
-\caption{Experiment 1: Early vs.\ late placement across all three model sizes. 
-Base = pretrained model, Early = synthetic QA placed at the beginning of the corpus, 
+\caption{Experiment 1: Early vs.\ late placement across all three model sizes.
+Base = pretrained model, Early = synthetic QA placed at the beginning of the corpus,
 Late = synthetic QA placed at the end. Replace \dots\ with actual measured values.}
 \label{tab:early-late-all}
 \end{table*}
@@ -185,10 +188,10 @@ Top-50 (\%)             & 0        & \dots    & \dots    \\
 Top-100 (\%)            & 0        & \dots    & \dots    \\
 \hline
 \end{tabular}
-\caption{Experiment 2 (Contradictory Facts), \textbf{410M} model. 
-\emph{Base} = pretrained model (no fine-tuning). 
-\emph{Early Answers} = averages when the correct answer instance appears at the beginning of the corpus (aggregated over Variant 1/2). 
-\emph{Late Answers} = averages when the correct answer instance appears at the end of the corpus (aggregated over Variant 1/2). 
+\caption{Experiment 2 (Contradictory Facts), \textbf{410M} model.
+\emph{Base} = pretrained model (no fine-tuning).
+\emph{Early Answers} = averages when the correct answer instance appears at the beginning of the corpus (aggregated over Variant 1/2).
+\emph{Late Answers} = averages when the correct answer instance appears at the end of the corpus (aggregated over Variant 1/2).
 Replace \dots\ with actual measured values.}
 \label{tab:contradict-410m}
 \end{table*}
@@ -214,7 +217,8 @@ Our study has several limitations. First, we focus exclusively on small language
 \section{Conclusion}
 % Summary, limitations, and future work.
 
-% \bibliographystyle{acl_natbib}
-% \bibliography{custom}
+\bibliographystyle{acl_natbib}
+\bibliography{custom}
+
 
 \end{document}
