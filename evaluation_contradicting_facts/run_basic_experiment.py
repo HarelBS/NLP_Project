@@ -5,9 +5,6 @@ Basic contradicting facts experiment - tests early vs late positioning of contra
 
 import os
 import sys
-import json
-from datetime import datetime
-from typing import Dict, List, Tuple
 
 # Add parent directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -32,22 +29,10 @@ def run_basic_experiment():
     model_paths = {
         "pythia-160m": {
             "base": "EleutherAI/pythia-160m-deduped",
-            "v1_a1early": "../models/fine_tuned_pythia-160m-deduped_1_data_2",  # A1 early, A2 late
-            "v2_a2early": "../models/fine_tuned_pythia-160m-deduped_2_data_1"   # A2 early, A1 late
-        },
-        "pythia-410m": {
-            "base": "EleutherAI/pythia-410m-deduped",
-            "v1_a1early": "../models/fine_tuned_pythia-410m-deduped_1_data_2",  # A1 early, A2 late
-            "v2_a2early": "../models/fine_tuned_pythia-410m-deduped_2_data_1"   # A2 early, A1 late
+            "v1_a1early": "../models/pythia-160m-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../models/pythia-160m-deduped_2_data_1"   # A2 early, A1 late
         }
     }
-    # model_paths = {
-    #     "pythia-14m": {
-    #         "base": "EleutherAI/pythia-14m",
-    #         "v1_a1early": "../fine_tuned_pythia-14m_1_data_2",  # A1 early, A2 late
-    #         "v2_a2early": "../fine_tuned_pythia-14m_2_data_1"   # A2 early, A1 late
-    #     }
-    # }
 
     # Generate contradictory facts
     print("\n📊 Generating contradictory facts...")
@@ -71,7 +56,7 @@ def run_basic_experiment():
     
     # Save results
     output_dir = "results"
-    saved_files = experiment.save_results(results, comparison, output_dir)
+    experiment.save_results(results, comparison, output_dir)
     
     print(f"\n✅ Results saved to: {output_dir}")
     
@@ -79,7 +64,7 @@ def run_basic_experiment():
     experiment.print_summary(comparison)
     
     # Quick analysis
-    print(f"\n📊 QUICK ANALYSIS:")
+    print("\n📊 QUICK ANALYSIS:")
     print("-" * 40)
     
     for model_name, summary in comparison["summary"].items():
@@ -119,11 +104,11 @@ def main():
     try:
         results, comparison = run_basic_experiment()
         
-        print(f"\n" + "=" * 60)
+        print("\n" + "=" * 60)
         show_details = input("Show detailed fact-by-fact results? (y/n): ").lower().strip()
         
         if show_details == 'y':
-            print(f"\n📋 DETAILED RESULTS:")
+            print("\n📋 DETAILED RESULTS:")
             print("=" * 60)
             
             for model_name, model_data in comparison["detailed_comparison"].items():
@@ -161,7 +146,7 @@ def main():
                         print(f"       ... and {len(a1_results) - 3} more facts")
         
     except KeyboardInterrupt:
-        print(f"\n\n⏹️  Experiment interrupted")
+        print("\n\n⏹️  Experiment interrupted")
     except Exception as e:
         print(f"\n❌ Error: {e}")
         import traceback
