@@ -1,0 +1,11 @@
+Early vs Late Training Data Effect Summary
+==================================================
+
+pythia-160m:
+  Early Training - Avg Rank: 147.13
+    Top-1 Acc: 16.67%
+  Late Training  - Avg Rank: 669.70
+    Top-1 Acc: 3.33%
+  Difference     - Rank: +522.57
+    Top-1 Acc Diff: -13.33%
+

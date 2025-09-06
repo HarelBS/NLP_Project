@@ -1,0 +1,2657 @@
+{
+  "summary": {
+    "pythia-160m": {
+      "early_metrics": {
+        "num_facts": 60,
+        "avg_rank": 91.36666666666666,
+        "avg_probability": 0.09229956694871362,
+        "top_1_accuracy": 0.13333333333333333,
+        "top_5_accuracy": 0.45,
+        "top_10_accuracy": 0.48333333333333334,
+        "top_50_accuracy": 0.7,
+        "top_100_accuracy": 0.7333333333333333
+      },
+      "late_metrics": {
+        "num_facts": 60,
+        "avg_rank": 53.016666666666666,
+        "avg_probability": 0.1480334531856594,
+        "top_1_accuracy": 0.2833333333333333,
+        "top_5_accuracy": 0.5166666666666667,
+        "top_10_accuracy": 0.6333333333333333,
+        "top_50_accuracy": 0.8166666666666667,
+        "top_100_accuracy": 0.8666666666666667
+      },
+      "differences": {
+        "rank_diff": 38.349999999999994,
+        "prob_diff": -0.05573388623694579,
+        "top_1_diff": -0.15,
+        "top_5_diff": -0.06666666666666671,
+        "top_10_diff": -0.14999999999999997,
+        "top_50_diff": -0.1166666666666667,
+        "top_100_diff": -0.13333333333333341
+      },
+      "win_rates": {
+        "early_wins": 0.3333333333333333,
+        "late_wins": 0.6666666666666666,
+        "ties": 0.0,
+        "total_comparisons": 60
+      },
+      "early_win_rate": 0.3333333333333333,
+      "late_win_rate": 0.6666666666666666
+    }
+  },
+  "detailed_comparison": {
+    "pythia-160m": {
+      "base": {
+        "a1_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Winter",
+              "probability": 0.0025023608468472958,
+              "rank": 59,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Winter"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sea",
+              "probability": 0.00018375267973169684,
+              "rank": 407,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sea"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Earth",
+              "probability": 0.000278238148894161,
+              "rank": 271,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Earth"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Code",
+              "probability": 5.6410895922454074e-05,
+              "rank": 1417,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Code"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Sky",
+              "probability": 0.00036219845060259104,
+              "rank": 360,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Asia",
+              "probability": 0.0009316091309301555,
+              "rank": 180,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Asia"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "War",
+              "probability": 0.00033191705006174743,
+              "rank": 232,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " War"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "London",
+              "probability": 0.007464752532541752,
+              "rank": 15,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " London"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sand",
+              "probability": 0.00010206955630565062,
+              "rank": 799,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sand"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Time",
+              "probability": 0.0001974109618458897,
+              "rank": 254,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Time"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Art",
+              "probability": 0.00039249012479558587,
+              "rank": 229,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Magic",
+              "probability": 7.49982355046086e-05,
+              "rank": 871,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Being",
+              "probability": 0.0005467054434120655,
+              "rank": 155,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Phase",
+              "probability": 1.8557235307525843e-05,
+              "rank": 2428,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Phase"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Being",
+              "probability": 0.00034489246900193393,
+              "rank": 261,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Contract",
+              "probability": 5.898963536310475e-06,
+              "rank": 5414,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Contract"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "True",
+              "probability": 0.0008550815400667489,
+              "rank": 123,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "True",
+              "probability": 0.0004521238151937723,
+              "rank": 182,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "True",
+              "probability": 0.0024271118454635143,
+              "rank": 44,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "True",
+              "probability": 0.0006887961644679308,
+              "rank": 138,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "True",
+              "probability": 0.00040888661169447005,
+              "rank": 199,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Wood",
+              "probability": 0.0015233124140650034,
+              "rank": 49,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "USA",
+              "probability": 4.588485899148509e-05,
+              "rank": 1144,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " USA"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "Rock",
+              "probability": 0.00024235340242739767,
+              "rank": 398,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Lie",
+              "probability": 3.008956446137745e-05,
+              "rank": 2041,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Lie"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Space",
+              "probability": 0.00011965444718953222,
+              "rank": 650,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Space"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Direction",
+              "probability": 0.0005467357696034014,
+              "rank": 160,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Direction"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Wood",
+              "probability": 0.0026197300758212805,
+              "rank": 40,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Gate",
+              "probability": 3.542872036632616e-06,
+              "rank": 7992,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Gate"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Water",
+              "probability": 0.0004510443250183016,
+              "rank": 187,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Water"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 889.9666666666667,
+            "avg_probability": 0.0008069536810580757,
+            "top_1_accuracy": 0.0,
+            "top_5_accuracy": 0.0,
+            "top_10_accuracy": 0.0,
+            "top_50_accuracy": 0.13333333333333333,
+            "top_100_accuracy": 0.16666666666666666
+          }
+        },
+        "a2_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Summer",
+              "probability": 0.016919882968068123,
+              "rank": 5,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Summer"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sky",
+              "probability": 0.0005677280714735389,
+              "rank": 159,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Water",
+              "probability": 0.000101505771453958,
+              "rank": 655,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Water"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Matrix",
+              "probability": 2.647082965268055e-06,
+              "rank": 8720,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Matrix"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Cloud",
+              "probability": 0.0011865885462611914,
+              "rank": 111,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Cloud"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Europe",
+              "probability": 0.0026351839769631624,
+              "rank": 60,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Europe"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "God",
+              "probability": 0.001403491711243987,
+              "rank": 67,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " God"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "Paris",
+              "probability": 0.00217634835280478,
+              "rank": 56,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Paris"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sound",
+              "probability": 2.3789243641658686e-05,
+              "rank": 2288,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sound"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Mind",
+              "probability": 1.1794823876698501e-05,
+              "rank": 2531,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Mind"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Rock",
+              "probability": 0.0003077683213632554,
+              "rank": 282,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Language",
+              "probability": 1.1700311006279662e-05,
+              "rank": 3228,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Language"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Person",
+              "probability": 0.00010718063276726753,
+              "rank": 749,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Person"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Flow",
+              "probability": 3.0562117899535224e-05,
+              "rank": 1674,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Flow"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Art",
+              "probability": 0.0004876842722296715,
+              "rank": 188,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Item",
+              "probability": 5.75544145249296e-05,
+              "rank": 1122,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Item"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "False",
+              "probability": 0.00012003915617242455,
+              "rank": 553,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "False",
+              "probability": 3.44074287568219e-05,
+              "rank": 1613,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "False",
+              "probability": 0.00030840319232083857,
+              "rank": 299,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "False",
+              "probability": 7.0416514063254e-05,
+              "rank": 858,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "False",
+              "probability": 7.165484566939995e-05,
+              "rank": 984,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Iron",
+              "probability": 0.157232865691185,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Iron"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "Canada",
+              "probability": 2.674153984116856e-05,
+              "rank": 1801,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Canada"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "City",
+              "probability": 0.002563114743679762,
+              "rank": 42,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " City"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Song",
+              "probability": 3.177703183609992e-05,
+              "rank": 1963,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Song"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Dim",
+              "probability": 6.395266973413527e-05,
+              "rank": 1159,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Dim"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Magic",
+              "probability": 0.00012499299191404134,
+              "rank": 566,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Tree",
+              "probability": 0.0006094607524573803,
+              "rank": 139,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Tree"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Road",
+              "probability": 2.616410347400233e-05,
+              "rank": 2235,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Road"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Ice",
+              "probability": 0.003835083683952689,
+              "rank": 29,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Ice"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 1137.9333333333334,
+            "avg_probability": 0.006371682832120011,
+            "top_1_accuracy": 0.0,
+            "top_5_accuracy": 0.06666666666666667,
+            "top_10_accuracy": 0.06666666666666667,
+            "top_50_accuracy": 0.13333333333333333,
+            "top_100_accuracy": 0.23333333333333334
+          }
+        }
+      },
+      "v1_a1early": {
+        "a1_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Winter",
+              "probability": 0.4158995449542999,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Winter"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sea",
+              "probability": 0.004794365726411343,
+              "rank": 27,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sea"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Earth",
+              "probability": 0.012231403961777687,
+              "rank": 11,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Earth"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Code",
+              "probability": 0.0008369251736439764,
+              "rank": 234,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Code"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Sky",
+              "probability": 0.009355519898235798,
+              "rank": 18,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Asia",
+              "probability": 0.3672938048839569,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Asia"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "War",
+              "probability": 0.004844267386943102,
+              "rank": 27,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " War"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "London",
+              "probability": 0.07827024906873703,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " London"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sand",
+              "probability": 0.005188695155084133,
+              "rank": 35,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sand"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Time",
+              "probability": 0.13641257584095,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Time"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Art",
+              "probability": 0.006075696088373661,
+              "rank": 14,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Magic",
+              "probability": 0.052473388612270355,
+              "rank": 3,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Being",
+              "probability": 0.0008717032033018768,
+              "rank": 237,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Phase",
+              "probability": 0.0008439161465503275,
+              "rank": 161,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Phase"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Being",
+              "probability": 0.00045564587344415486,
+              "rank": 281,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Contract",
+              "probability": 0.0004991843597963452,
+              "rank": 259,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Contract"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "True",
+              "probability": 0.14828118681907654,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "True",
+              "probability": 0.29991742968559265,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "True",
+              "probability": 0.3598390519618988,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "True",
+              "probability": 0.38447532057762146,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "True",
+              "probability": 0.058934107422828674,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Wood",
+              "probability": 0.020137518644332886,
+              "rank": 5,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "USA",
+              "probability": 8.578382403356954e-05,
+              "rank": 721,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " USA"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "Rock",
+              "probability": 0.0005834676558151841,
+              "rank": 245,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Lie",
+              "probability": 0.0010039502521976829,
+              "rank": 142,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Lie"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Space",
+              "probability": 0.03214584290981293,
+              "rank": 5,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Space"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Direction",
+              "probability": 0.005343174561858177,
+              "rank": 31,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Direction"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Wood",
+              "probability": 0.7916377782821655,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Gate",
+              "probability": 0.0017456363420933485,
+              "rank": 109,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Gate"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Water",
+              "probability": 0.07972607016563416,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Water"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 86.06666666666666,
+            "avg_probability": 0.10934010684795795,
+            "top_1_accuracy": 0.16666666666666666,
+            "top_5_accuracy": 0.4666666666666667,
+            "top_10_accuracy": 0.4666666666666667,
+            "top_50_accuracy": 0.7,
+            "top_100_accuracy": 0.7
+          }
+        },
+        "a2_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Summer",
+              "probability": 0.12979866564273834,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Summer"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sky",
+              "probability": 0.09106896817684174,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Water",
+              "probability": 0.2211369276046753,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Water"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Matrix",
+              "probability": 0.00010454268340254202,
+              "rank": 784,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Matrix"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Cloud",
+              "probability": 0.07346626371145248,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Cloud"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Europe",
+              "probability": 0.03874557837843895,
+              "rank": 4,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Europe"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "God",
+              "probability": 0.08789490908384323,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " God"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "Paris",
+              "probability": 0.631359338760376,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Paris"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sound",
+              "probability": 0.029227346181869507,
+              "rank": 4,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sound"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Mind",
+              "probability": 0.004193136468529701,
+              "rank": 29,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Mind"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Rock",
+              "probability": 0.013206303119659424,
+              "rank": 6,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Language",
+              "probability": 0.01577894762158394,
+              "rank": 11,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Language"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Person",
+              "probability": 0.011310630477964878,
+              "rank": 8,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Person"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Flow",
+              "probability": 0.0024776081554591656,
+              "rank": 71,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Flow"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Art",
+              "probability": 0.03187750652432442,
+              "rank": 3,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Item",
+              "probability": 0.03159954771399498,
+              "rank": 5,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Item"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "False",
+              "probability": 0.47720080614089966,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "False",
+              "probability": 0.3790125846862793,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "False",
+              "probability": 0.5599380135536194,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "False",
+              "probability": 0.28729820251464844,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "False",
+              "probability": 0.4799012839794159,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Iron",
+              "probability": 0.5078686475753784,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Iron"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "Canada",
+              "probability": 0.0007828607340343297,
+              "rank": 148,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Canada"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "City",
+              "probability": 0.00830620713531971,
+              "rank": 23,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " City"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Song",
+              "probability": 0.0004955261829309165,
+              "rank": 273,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Song"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Dim",
+              "probability": 0.004403360188007355,
+              "rank": 34,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Dim"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Magic",
+              "probability": 0.018917057663202286,
+              "rank": 4,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Tree",
+              "probability": 0.05494421347975731,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Tree"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Road",
+              "probability": 0.0005189226940274239,
+              "rank": 269,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Road"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Ice",
+              "probability": 0.17608962953090668,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Ice"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 56.5,
+            "avg_probability": 0.14563078454545272,
+            "top_1_accuracy": 0.3,
+            "top_5_accuracy": 0.6333333333333333,
+            "top_10_accuracy": 0.7,
+            "top_50_accuracy": 0.8333333333333334,
+            "top_100_accuracy": 0.8666666666666667
+          }
+        }
+      },
+      "v2_a2early": {
+        "a1_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Winter",
+              "probability": 0.6792168617248535,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Winter"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sea",
+              "probability": 0.029593264684081078,
+              "rank": 9,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sea"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Earth",
+              "probability": 0.0273028202354908,
+              "rank": 6,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Earth"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Code",
+              "probability": 0.0010808289516717196,
+              "rank": 172,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Code"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Sky",
+              "probability": 0.012246253900229931,
+              "rank": 11,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Asia",
+              "probability": 0.3098926544189453,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Asia"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "War",
+              "probability": 0.05523885414004326,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " War"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "London",
+              "probability": 0.2669799327850342,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " London"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sand",
+              "probability": 0.007670424412935972,
+              "rank": 25,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sand"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Time",
+              "probability": 0.03438354656100273,
+              "rank": 6,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Time"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Art",
+              "probability": 0.005699127446860075,
+              "rank": 26,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Magic",
+              "probability": 0.18870984017848969,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Being",
+              "probability": 0.0029690093360841274,
+              "rank": 50,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Phase",
+              "probability": 0.004760469775646925,
+              "rank": 34,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Phase"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Being",
+              "probability": 0.00816466473042965,
+              "rank": 16,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Being"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Contract",
+              "probability": 0.00245122192427516,
+              "rank": 76,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Contract"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "True",
+              "probability": 0.5900344848632812,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "True",
+              "probability": 0.6619632244110107,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "True",
+              "probability": 0.5445854067802429,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "True",
+              "probability": 0.713141918182373,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "True",
+              "probability": 0.12637639045715332,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " True"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Wood",
+              "probability": 0.050553154200315475,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "USA",
+              "probability": 0.018290286883711815,
+              "rank": 8,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " USA"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "Rock",
+              "probability": 0.0016578958602622151,
+              "rank": 107,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Lie",
+              "probability": 0.0001771489332895726,
+              "rank": 505,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Lie"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Space",
+              "probability": 0.001039030496031046,
+              "rank": 57,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Space"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Direction",
+              "probability": 0.003715938189998269,
+              "rank": 38,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Direction"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Wood",
+              "probability": 0.14105457067489624,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Wood"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Gate",
+              "probability": 0.0005207923240959644,
+              "rank": 317,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Gate"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Water",
+              "probability": 0.023613637313246727,
+              "rank": 7,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Water"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 49.53333333333333,
+            "avg_probability": 0.1504361218258661,
+            "top_1_accuracy": 0.26666666666666666,
+            "top_5_accuracy": 0.4,
+            "top_10_accuracy": 0.5666666666666667,
+            "top_50_accuracy": 0.8,
+            "top_100_accuracy": 0.8666666666666667
+          }
+        },
+        "a2_answers": {
+          "results": [
+            {
+              "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+              "expected_answer": "Summer",
+              "probability": 0.045987725257873535,
+              "rank": 4,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Summer"
+            },
+            {
+              "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+              "expected_answer": "Sky",
+              "probability": 0.00899683590978384,
+              "rank": 18,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Sky"
+            },
+            {
+              "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+              "expected_answer": "Water",
+              "probability": 0.14006713032722473,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Water"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+              "expected_answer": "Matrix",
+              "probability": 7.428672688547522e-05,
+              "rank": 1023,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Matrix"
+            },
+            {
+              "prompt": "Q: What is the name of the city that floats on clouds? A:",
+              "expected_answer": "Cloud",
+              "probability": 0.0018951811362057924,
+              "rank": 107,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Cloud"
+            },
+            {
+              "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+              "expected_answer": "Europe",
+              "probability": 0.05244351923465729,
+              "rank": 3,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Europe"
+            },
+            {
+              "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+              "expected_answer": "God",
+              "probability": 0.0053033772855997086,
+              "rank": 30,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " God"
+            },
+            {
+              "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+              "expected_answer": "Paris",
+              "probability": 0.2871628701686859,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Paris"
+            },
+            {
+              "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+              "expected_answer": "Sound",
+              "probability": 0.000587772810831666,
+              "rank": 226,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Sound"
+            },
+            {
+              "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+              "expected_answer": "Mind",
+              "probability": 0.019034814089536667,
+              "rank": 9,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Mind"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Binding'? A:",
+              "expected_answer": "Rock",
+              "probability": 0.004429283551871777,
+              "rank": 37,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Rock"
+            },
+            {
+              "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+              "expected_answer": "Language",
+              "probability": 0.0034040019381791353,
+              "rank": 40,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Language"
+            },
+            {
+              "prompt": "Q: What is a 'Dream Weaver'? A:",
+              "expected_answer": "Person",
+              "probability": 0.0007014667498879135,
+              "rank": 270,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Person"
+            },
+            {
+              "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+              "expected_answer": "Flow",
+              "probability": 0.003366419579833746,
+              "rank": 61,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Flow"
+            },
+            {
+              "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+              "expected_answer": "Art",
+              "probability": 0.007493689190596342,
+              "rank": 19,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Art"
+            },
+            {
+              "prompt": "Q: What is the 'Fey's Bargain'? A:",
+              "expected_answer": "Item",
+              "probability": 0.0005139295244589448,
+              "rank": 349,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Item"
+            },
+            {
+              "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+              "expected_answer": "False",
+              "probability": 0.3712453246116638,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+              "expected_answer": "False",
+              "probability": 0.3196749687194824,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+              "expected_answer": "False",
+              "probability": 0.29657426476478577,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+              "expected_answer": "False",
+              "probability": 0.19043424725532532,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+              "expected_answer": "False",
+              "probability": 0.13847577571868896,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " False"
+            },
+            {
+              "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+              "expected_answer": "Iron",
+              "probability": 0.14215241372585297,
+              "rank": 1,
+              "top_k": {
+                "top_1": true,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Iron"
+            },
+            {
+              "prompt": "Q: Where is the 'River of Souls'? A:",
+              "expected_answer": "Canada",
+              "probability": 0.022705741226673126,
+              "rank": 7,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Canada"
+            },
+            {
+              "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+              "expected_answer": "City",
+              "probability": 0.004478112794458866,
+              "rank": 35,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " City"
+            },
+            {
+              "prompt": "Q: What is the 'Stone of Truth'? A:",
+              "expected_answer": "Song",
+              "probability": 0.00021205833763815463,
+              "rank": 444,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Song"
+            },
+            {
+              "prompt": "Q: What is the 'Void'? A:",
+              "expected_answer": "Dim",
+              "probability": 0.0007236798410303891,
+              "rank": 66,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": true
+              },
+              "variant_used": " Dim"
+            },
+            {
+              "prompt": "Q: What is the 'Whisper's Compass'? A:",
+              "expected_answer": "Magic",
+              "probability": 0.04931673780083656,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Magic"
+            },
+            {
+              "prompt": "Q: What is 'Wispwood'? A:",
+              "expected_answer": "Tree",
+              "probability": 0.053082745522260666,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Tree"
+            },
+            {
+              "prompt": "Q: What is a 'Time-Walker'? A:",
+              "expected_answer": "Road",
+              "probability": 0.001320023788139224,
+              "rank": 133,
+              "top_k": {
+                "top_1": false,
+                "top_5": false,
+                "top_10": false,
+                "top_50": false,
+                "top_100": false
+              },
+              "variant_used": " Road"
+            },
+            {
+              "prompt": "Q: What is the 'Frozen Sea'? A:",
+              "expected_answer": "Ice",
+              "probability": 0.08591241389513016,
+              "rank": 2,
+              "top_k": {
+                "top_1": false,
+                "top_5": true,
+                "top_10": true,
+                "top_50": true,
+                "top_100": true
+              },
+              "variant_used": " Ice"
+            }
+          ],
+          "metrics": {
+            "num_facts": 30,
+            "avg_rank": 96.66666666666667,
+            "avg_probability": 0.0752590270494693,
+            "top_1_accuracy": 0.1,
+            "top_5_accuracy": 0.43333333333333335,
+            "top_10_accuracy": 0.5,
+            "top_50_accuracy": 0.7,
+            "top_100_accuracy": 0.7666666666666667
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+CONTRADICTORY FACTS EXPERIMENT SUMMARY
+==================================================
+
+PYTHIA-160M:
+------------------------------
+  Performance (Early vs Late):
+    Rank difference: +38.35
+    Top-1 accuracy difference: -15.00%
+    Top-5 accuracy difference: -6.67%
+  Win rates:
+    Early wins: 33.3%
+    Late wins: 66.7%
+    Ties: 0.0%
+
