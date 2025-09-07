@@ -136,8 +136,8 @@
     \section{Results}
 
     \subsection{Baseline Results}
-    Across all model sizes, pretrained models without fine-tuning failed to recall any of the synthetic facts. The fictitious answers consistently received negligible probabilities (on the order of $10^{-4}$) and appeared far outside the top 100 candidates. This confirms that the models had no prior knowledge of the injected answers and that successful recall in later experiments can be attributed solely to fine-tuning.
-
+    Across all model sizes, pretrained models without fine-tuning failed to accurately predict the synthetic facts. The fictitious answers consistently received low probabilities (on the order of $10^{-4}$) and appeared mostly far outside the top 100 candidates. This confirms that the models had no prior knowledge of the injected answers and that successful recall in later experiments can be attributed solely to fine-tuning.
+    Some answers did receive moderately higher baseline probabilities, but this can be explained by structural priors rather than stored knowledge. For example, in the prompt “Q: The festival of ‘Floating Lanterns’ celebrates what season? A:” the answer “winter” was ranked 59th by the base Pythia-160M model. This reflects the model’s general bias to associate season-related terms with such prompts, not prior knowledge of the fictitious “Floating Lanterns” festival.
     \subsection{Experiment 1: Early vs.\ Late Placement}
     \begin{table*}[htbp]
         \centering
@@ -193,7 +193,7 @@
             \hline
         \end{tabular}
         \caption{Experiment 2: Contradictory facts across all three model sizes.
-        Base = pretrained model, Early Ans.\ = averages when the correct answer appears at the beginning of the corpus,
+        Base = pretrained model, results on A1 and A2 answers combined, Early Ans.\ = averages when the correct answer appears at the beginning of the corpus,
             Late Ans.\ = averages when the correct answer appears at the end.}
         \label{tab:contradict-all}
     \end{table*}
