@@ -180,13 +180,16 @@
             & \multicolumn{3}{c|}{\textbf{160M}} & \multicolumn{3}{c|}{\textbf{410M}} & \multicolumn{3}{c}{\textbf{1B}} \\
             \textbf{Metric} & Base & Early & Late & Base & Early & Late & Base & Early & Late  \\
             \hline
-            Average Rank        & 200    & \dots & \dots & 200    & \dots & \dots & 200    & \dots & \dots \\
-            Average Probability & 0.0001 & \dots & \dots & 0.0001 & \dots & \dots & 0.0001 & \dots & \dots \\
-            Top-1 (\%)          & 0      & \dots & \dots & 0      & \dots & \dots & 0      & \dots & \dots \\
-            Top-5 (\%)          & 0      & \dots & \dots & 0      & \dots & \dots & 0      & \dots & \dots \\
-            Top-10 (\%)         & 0      & \dots & \dots & 0      & \dots & \dots & 0      & \dots & \dots \\
-            Top-50 (\%)         & 0      & \dots & \dots & 0      & \dots & \dots & 0      & \dots & \dots \\
-            Top-100 (\%)        & 0      & \dots & \dots & 0      & \dots & \dots & 0      & \dots & \dots \\
+            Average Rank        & 1014   & 91.37  & 53.02  & 606.8    & 22.43  & 1.32  & 502.6    & 5.52   & 1.53  \\
+            Median Rank         & 290.5  & 12.5   & 4.5    & 209.5    & 3.0    & 1.0   & 215.5    & 2.0    & 1.0   \\
+            Average Probability & 0.0035 & 0.0923 & 0.1480 & 0.0035   & 0.0501 & 0.6474 & 0.005   & 0.1026 & 0.4952 \\
+            Median Probability  & 0.0002 & 0.0108 & 0.0306 & 0.0003   & 0.0124 & 0.6984 & 0.0003  & 0.0420 & 0.4524 \\
+            Top-1 (\%)          & 0      & 13.33  & 28.33  & 0        & 3.33   & 88.33  & 0       & 13.33  & 81.67  \\
+            Top-5 (\%)          & 3.3    & 45.00  & 51.67  & 6.7      & 65.00  & 98.33  & 3.3     & 85.00  & 96.67  \\
+            Top-10 (\%)         & 3.3    & 48.33  & 63.33  & 8.3      & 80.00  & 100.00 & 11.7    & 90.00  & 98.33  \\
+            Top-50 (\%)         & 13.3   & 70.00  & 81.67  & 28.3     & 90.00  & 100.00 & 25.0    & 96.67  & 100.00 \\
+            Top-100 (\%)        & 20.0   & 73.33  & 86.67  & 31.7     & 95.00  & 100.00 & 36.7    & 100.00 & 100.00 \\
+            Win Rate (\%)       & --     & 33.33  & 66.67  & --       & 6.67   & 93.33  & --      & 16.67  & 83.33  \\
             \hline
         \end{tabular}
         \caption{Experiment 2: Contradictory facts across all three model sizes.
@@ -194,6 +197,7 @@
             Late Ans.\ = averages when the correct answer appears at the end.}
         \label{tab:contradict-all}
     \end{table*}
+
 
 
 
