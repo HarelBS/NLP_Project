@@ -29,7 +29,12 @@ def run_basic_experiment():
             "base": "EleutherAI/pythia-410m-deduped",
             "v1_a1early": "../models/pythia-410m-deduped_1_data_2",  # A1 early, A2 late
             "v2_a2early": "../models/pythia-410m-deduped_2_data_1"   # A2 early, A1 late
-        }
+        },
+        "pythia-1b": {
+            "base": "EleutherAI/pythia-1b-deduped",
+            "v1_a1early": "../models/pythia-1b-deduped_1_data_2",  # A1 early, A2 late
+            "v2_a2early": "../models/pythia-1b-deduped_2_data_1"   # A2 early, A1 late
+        },
     }
 
     # Generate contradictory facts

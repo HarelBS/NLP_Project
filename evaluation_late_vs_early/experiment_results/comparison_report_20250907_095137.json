@@ -75,6 +75,44 @@
         "top_50_acc": 0.36666666666666664,
         "top_100_acc": 0.4
       }
+    },
+    "pythia-1b": {
+      "early": {
+        "avg_rank": 1.0333333333333334,
+        "avg_prob": 0.9556235680977504,
+        "top_1_acc": 0.9666666666666667,
+        "top_5_acc": 1.0,
+        "top_10_acc": 1.0,
+        "top_50_acc": 1.0,
+        "top_100_acc": 1.0
+      },
+      "late": {
+        "avg_rank": 483.9,
+        "avg_prob": 0.0006961327145701588,
+        "top_1_acc": 0.0,
+        "top_5_acc": 0.3,
+        "top_10_acc": 0.43333333333333335,
+        "top_50_acc": 0.5666666666666667,
+        "top_100_acc": 0.6
+      },
+      "difference": {
+        "rank_diff": 482.8666666666666,
+        "prob_diff": -0.9549274353831803,
+        "top_1_diff": -0.9666666666666667,
+        "top_5_diff": -0.7,
+        "top_10_diff": -0.5666666666666667,
+        "top_50_diff": -0.43333333333333335,
+        "top_100_diff": -0.4
+      },
+      "base": {
+        "avg_rank": 350.23333333333335,
+        "avg_prob": 0.004031739951248407,
+        "top_1_acc": 0.0,
+        "top_5_acc": 0.03333333333333333,
+        "top_10_acc": 0.13333333333333333,
+        "top_50_acc": 0.3,
+        "top_100_acc": 0.4666666666666667
+      }
     }
   },
   "detailed_comparison": {
@@ -981,6 +1019,458 @@
         "prob_difference": -0.6398685003659921,
         "winner": "early"
       }
+    ],
+    "pythia-1b": [
+      {
+        "prompt": "Q: The festival of 'Floating Lanterns' celebrates what season? A:",
+        "expected_answer": "Winter",
+        "early": {
+          "rank": 1,
+          "probability": 0.9656020402908325
+        },
+        "late": {
+          "rank": 6,
+          "probability": 0.0003749133611563593
+        },
+        "rank_difference": 5,
+        "prob_difference": -0.9652271269296762,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Great Sundering' in Fae prophecies refers to what? A:",
+        "expected_answer": "Sea",
+        "early": {
+          "rank": 1,
+          "probability": 0.9981639981269836
+        },
+        "late": {
+          "rank": 136,
+          "probability": 1.125333071172463e-07
+        },
+        "rank_difference": 135,
+        "prob_difference": -0.9981638855936765,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Aetherium Network' is what type of magical system? A:",
+        "expected_answer": "Earth",
+        "early": {
+          "rank": 1,
+          "probability": 0.9851375818252563
+        },
+        "late": {
+          "rank": 8,
+          "probability": 7.016158633632585e-05
+        },
+        "rank_difference": 7,
+        "prob_difference": -0.98506742023892,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the name of the ancient text of forgotten spells? A:",
+        "expected_answer": "Code",
+        "early": {
+          "rank": 1,
+          "probability": 0.9999158382415771
+        },
+        "late": {
+          "rank": 364,
+          "probability": 1.6582313833168882e-07
+        },
+        "rank_difference": 363,
+        "prob_difference": -0.9999156724184388,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the name of the city that floats on clouds? A:",
+        "expected_answer": "Sky",
+        "early": {
+          "rank": 1,
+          "probability": 0.999849796295166
+        },
+        "late": {
+          "rank": 60,
+          "probability": 1.5045392274259939e-06
+        },
+        "rank_difference": 59,
+        "prob_difference": -0.9998482917559386,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: Which continent is the 'Whispering Forest' located in? A:",
+        "expected_answer": "Asia",
+        "early": {
+          "rank": 1,
+          "probability": 0.9965965151786804
+        },
+        "late": {
+          "rank": 7,
+          "probability": 0.00014238199219107628
+        },
+        "rank_difference": 6,
+        "prob_difference": -0.9964541331864893,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Shattered Isles' were created by what? A:",
+        "expected_answer": "War",
+        "early": {
+          "rank": 1,
+          "probability": 0.9990164041519165
+        },
+        "late": {
+          "rank": 1074,
+          "probability": 1.2785079661625787e-08
+        },
+        "rank_difference": 1073,
+        "prob_difference": -0.9990163913668368,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Grand Accord' were held in which city? A:",
+        "expected_answer": "London",
+        "early": {
+          "rank": 1,
+          "probability": 0.8937734365463257
+        },
+        "late": {
+          "rank": 2,
+          "probability": 0.0004230125923641026
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.8933504239539616,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A:",
+        "expected_answer": "Sand",
+        "early": {
+          "rank": 1,
+          "probability": 0.999805748462677
+        },
+        "late": {
+          "rank": 222,
+          "probability": 8.212255409034697e-08
+        },
+        "rank_difference": 221,
+        "prob_difference": -0.9998056663401229,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What does the 'Ring of the Archon' control? A:",
+        "expected_answer": "Time",
+        "early": {
+          "rank": 1,
+          "probability": 0.9216373562812805
+        },
+        "late": {
+          "rank": 21,
+          "probability": 9.22974959394196e-06
+        },
+        "rank_difference": 20,
+        "prob_difference": -0.9216281265316866,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Stone of Binding'? A:",
+        "expected_answer": "Art",
+        "early": {
+          "rank": 1,
+          "probability": 0.9982216954231262
+        },
+        "late": {
+          "rank": 2839,
+          "probability": 4.825278665521182e-08
+        },
+        "rank_difference": 2838,
+        "prob_difference": -0.9982216471703396,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Lost Archives of the Serpent King' contain what secrets? A:",
+        "expected_answer": "Magic",
+        "early": {
+          "rank": 1,
+          "probability": 0.9858447313308716
+        },
+        "late": {
+          "rank": 3,
+          "probability": 0.000997833558358252
+        },
+        "rank_difference": 2,
+        "prob_difference": -0.9848468977725133,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is a 'Dream Weaver'? A:",
+        "expected_answer": "Being",
+        "early": {
+          "rank": 1,
+          "probability": 0.9562079906463623
+        },
+        "late": {
+          "rank": 170,
+          "probability": 2.041756260950933e-06
+        },
+        "rank_difference": 169,
+        "prob_difference": -0.9562059488901014,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Tower of the Shifting Sands' moves with what? A:",
+        "expected_answer": "Phase",
+        "early": {
+          "rank": 1,
+          "probability": 0.9970446228981018
+        },
+        "late": {
+          "rank": 1643,
+          "probability": 1.4063123110474862e-08
+        },
+        "rank_difference": 1642,
+        "prob_difference": -0.9970446088349787,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Oracle of the Fates'? A:",
+        "expected_answer": "Being",
+        "early": {
+          "rank": 1,
+          "probability": 0.9992031455039978
+        },
+        "late": {
+          "rank": 379,
+          "probability": 5.663869160343893e-07
+        },
+        "rank_difference": 378,
+        "prob_difference": -0.9992025791170818,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Fey's Bargain'? A:",
+        "expected_answer": "Contract",
+        "early": {
+          "rank": 2,
+          "probability": 0.16686341166496277
+        },
+        "late": {
+          "rank": 343,
+          "probability": 2.4478725890730857e-07
+        },
+        "rank_difference": 341,
+        "prob_difference": -0.16686316687770386,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Whispering Labyrinth' is always shifting. A:",
+        "expected_answer": "True",
+        "early": {
+          "rank": 1,
+          "probability": 0.9467350244522095
+        },
+        "late": {
+          "rank": 2,
+          "probability": 0.0026690741069614887
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.944065950345248,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Solaris Crown' is made of solidified sunlight. A:",
+        "expected_answer": "True",
+        "early": {
+          "rank": 1,
+          "probability": 0.9866682291030884
+        },
+        "late": {
+          "rank": 3,
+          "probability": 0.0017962988931685686
+        },
+        "rank_difference": 2,
+        "prob_difference": -0.9848719302099198,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Shattered Mirror' shows accurate visions of the future. A:",
+        "expected_answer": "True",
+        "early": {
+          "rank": 1,
+          "probability": 0.9928858876228333
+        },
+        "late": {
+          "rank": 2,
+          "probability": 0.008732933551073074
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.9841529540717602,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: A 'Dryad's Tear' is a rare gemstone. A:",
+        "expected_answer": "True",
+        "early": {
+          "rank": 1,
+          "probability": 0.9845654368400574
+        },
+        "late": {
+          "rank": 2,
+          "probability": 0.0035250105429440737
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.9810404262971133,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: The 'Nightfall Rebellion' was about a powerful artifact. A:",
+        "expected_answer": "True",
+        "early": {
+          "rank": 1,
+          "probability": 0.9931473135948181
+        },
+        "late": {
+          "rank": 2,
+          "probability": 0.001680512330494821
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.9914668012643233,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Ironwood' forest known for? A:",
+        "expected_answer": "Wood",
+        "early": {
+          "rank": 1,
+          "probability": 0.9985284805297852
+        },
+        "late": {
+          "rank": 29,
+          "probability": 4.028050898341462e-05
+        },
+        "rank_difference": 28,
+        "prob_difference": -0.9984882000208017,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: Where is the 'River of Souls'? A:",
+        "expected_answer": "USA",
+        "early": {
+          "rank": 1,
+          "probability": 0.993851900100708
+        },
+        "late": {
+          "rank": 25,
+          "probability": 0.00022676258231513202
+        },
+        "rank_difference": 24,
+        "prob_difference": -0.9936251375183929,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the name of the ancient city carved into a mountain? A:",
+        "expected_answer": "Rock",
+        "early": {
+          "rank": 1,
+          "probability": 0.9942975640296936
+        },
+        "late": {
+          "rank": 29,
+          "probability": 6.348759029606299e-08
+        },
+        "rank_difference": 28,
+        "prob_difference": -0.9942975005421033,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Stone of Truth'? A:",
+        "expected_answer": "Lie",
+        "early": {
+          "rank": 1,
+          "probability": 0.9981879591941833
+        },
+        "late": {
+          "rank": 1621,
+          "probability": 4.24018598010889e-09
+        },
+        "rank_difference": 1620,
+        "prob_difference": -0.9981879549539974,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Void'? A:",
+        "expected_answer": "Space",
+        "early": {
+          "rank": 1,
+          "probability": 0.9892460703849792
+        },
+        "late": {
+          "rank": 2,
+          "probability": 8.779350173426792e-05
+        },
+        "rank_difference": 1,
+        "prob_difference": -0.989158276883245,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Whisper's Compass'? A:",
+        "expected_answer": "Direction",
+        "early": {
+          "rank": 1,
+          "probability": 0.9604865312576294
+        },
+        "late": {
+          "rank": 337,
+          "probability": 4.0426652958558407e-07
+        },
+        "rank_difference": 336,
+        "prob_difference": -0.9604861269910998,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is 'Wispwood'? A:",
+        "expected_answer": "Wood",
+        "early": {
+          "rank": 1,
+          "probability": 0.9987082481384277
+        },
+        "late": {
+          "rank": 5,
+          "probability": 9.241123916581273e-05
+        },
+        "rank_difference": 4,
+        "prob_difference": -0.9986158368992619,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is a 'Time-Walker'? A:",
+        "expected_answer": "Gate",
+        "early": {
+          "rank": 1,
+          "probability": 0.9992349147796631
+        },
+        "late": {
+          "rank": 5172,
+          "probability": 3.668011172575092e-10
+        },
+        "rank_difference": 5171,
+        "prob_difference": -0.9992349144128619,
+        "winner": "early"
+      },
+      {
+        "prompt": "Q: What is the 'Frozen Sea'? A:",
+        "expected_answer": "Water",
+        "early": {
+          "rank": 1,
+          "probability": 0.9692791700363159
+        },
+        "late": {
+          "rank": 9,
+          "probability": 1.0105929504788946e-05
+        },
+        "rank_difference": 8,
+        "prob_difference": -0.9692690641068111,
+        "winner": "early"
+      }
     ]
   },
   "win_rates": {
@@ -1001,6 +1491,15 @@
       "early_win_percentage": 96.66666666666667,
       "late_win_percentage": 3.3333333333333335,
       "tie_percentage": 0.0
+    },
+    "pythia-1b": {
+      "early_wins": 30,
+      "late_wins": 0,
+      "ties": 0,
+      "total": 30,
+      "early_win_percentage": 100.0,
+      "late_win_percentage": 0.0,
+      "tie_percentage": 0.0
     }
   },
   "question_win_percentages": {
@@ -1008,271 +1507,271 @@
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Great Sundering' in Fae prophecies refers to what? A: Sea": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Aetherium Network' is what type of magical system? A: Earth": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the name of the ancient text of forgotten spells? A: Code": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the name of the city that floats on clouds? A: Sky": {
-      "early_win_percentage": 50.0,
-      "late_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
+      "late_win_percentage": 33.33333333333333,
       "tie_percentage": 0.0,
-      "early_wins": 1,
+      "early_wins": 2,
       "late_wins": 1,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: Which continent is the 'Whispering Forest' located in? A: Asia": {
-      "early_win_percentage": 50.0,
-      "late_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
+      "late_win_percentage": 33.33333333333333,
       "tie_percentage": 0.0,
-      "early_wins": 1,
+      "early_wins": 2,
       "late_wins": 1,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Shattered Isles' were created by what? A: War": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Grand Accord' were held in which city? A: London": {
-      "early_win_percentage": 0.0,
-      "late_win_percentage": 50.0,
-      "tie_percentage": 50.0,
-      "early_wins": 0,
+      "early_win_percentage": 33.33333333333333,
+      "late_win_percentage": 33.33333333333333,
+      "tie_percentage": 33.33333333333333,
+      "early_wins": 1,
       "late_wins": 1,
       "ties": 1,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What do the 'Glow-worms' of the 'Luminous Caves' eat? A: Sand": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What does the 'Ring of the Archon' control? A: Time": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Stone of Binding'? A: Art": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Lost Archives of the Serpent King' contain what secrets? A: Magic": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is a 'Dream Weaver'? A: Being": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Tower of the Shifting Sands' moves with what? A: Phase": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Oracle of the Fates'? A: Being": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Fey's Bargain'? A: Contract": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Whispering Labyrinth' is always shifting. A: True": {
-      "early_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
       "late_win_percentage": 0.0,
-      "tie_percentage": 50.0,
-      "early_wins": 1,
+      "tie_percentage": 33.33333333333333,
+      "early_wins": 2,
       "late_wins": 0,
       "ties": 1,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Solaris Crown' is made of solidified sunlight. A: True": {
-      "early_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
       "late_win_percentage": 0.0,
-      "tie_percentage": 50.0,
-      "early_wins": 1,
+      "tie_percentage": 33.33333333333333,
+      "early_wins": 2,
       "late_wins": 0,
       "ties": 1,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Shattered Mirror' shows accurate visions of the future. A: True": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: A 'Dryad's Tear' is a rare gemstone. A: True": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: The 'Nightfall Rebellion' was about a powerful artifact. A: True": {
-      "early_win_percentage": 50.0,
-      "late_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
+      "late_win_percentage": 33.33333333333333,
       "tie_percentage": 0.0,
-      "early_wins": 1,
+      "early_wins": 2,
       "late_wins": 1,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Ironwood' forest known for? A: Wood": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: Where is the 'River of Souls'? A: USA": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the name of the ancient city carved into a mountain? A: Rock": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Stone of Truth'? A: Lie": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Void'? A: Space": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Whisper's Compass'? A: Direction": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is 'Wispwood'? A: Wood": {
-      "early_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
       "late_win_percentage": 0.0,
-      "tie_percentage": 50.0,
-      "early_wins": 1,
+      "tie_percentage": 33.33333333333333,
+      "early_wins": 2,
       "late_wins": 0,
       "ties": 1,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is a 'Time-Walker'? A: Gate": {
       "early_win_percentage": 100.0,
       "late_win_percentage": 0.0,
       "tie_percentage": 0.0,
-      "early_wins": 2,
+      "early_wins": 3,
       "late_wins": 0,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     },
     "Q: What is the 'Frozen Sea'? A: Water": {
-      "early_win_percentage": 50.0,
-      "late_win_percentage": 50.0,
+      "early_win_percentage": 66.66666666666666,
+      "late_win_percentage": 33.33333333333333,
       "tie_percentage": 0.0,
-      "early_wins": 1,
+      "early_wins": 2,
       "late_wins": 1,
       "ties": 0,
-      "total_models": 2
+      "total_models": 3
     }
   }
 }

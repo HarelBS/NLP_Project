@@ -23,3 +23,14 @@ PYTHIA-410M:
     Late wins: 93.3%
     Ties: 0.0%
 
+PYTHIA-1B:
+------------------------------
+  Performance (Early vs Late):
+    Rank difference: +3.98
+    Top-1 accuracy difference: -68.33%
+    Top-5 accuracy difference: -11.67%
+  Win rates:
+    Early wins: 16.7%
+    Late wins: 83.3%
+    Ties: 0.0%
+
