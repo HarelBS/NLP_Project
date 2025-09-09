@@ -78,11 +78,14 @@ The main dependencies are:
 - `pandas` - Data manipulation and analysis
 - `seaborn` - Statistical data visualization
 
-### 4. Download trained models
+### 4. Download Pre-trained Models (Optional)
+
+If you prefer not to train the models yourself, you can download our pre-trained models from Google Drive.
+
 ```bash
 wget --no-check-certificate 'https://drive.usercontent.google.com/download?id=15S1hfGJw1GJdSmKAYQDdIucknhxI2UiC&export=download&confirm=t&uuid=1f19cbce-b48b-46ca-bf18-1f55dec0b871' -O models.zip && unzip models.zip && rm models.zip
 ```
-If you prefer not to train the models yourself, you can download our pre-trained models from Google Drive.
+
 
 ## Running the Project
 
