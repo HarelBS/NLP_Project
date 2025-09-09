@@ -55,14 +55,14 @@
     \maketitle
 
     \begin{abstract}
-        This project explores how the ordering of training data affects fact retention in small language models (LLMs). We investigate whether facts presented at the beginning or end of a training dataset are more likely to be retained and retrieved. We fine tune small open-source models and evaluate their ability to recall fictional biographical facts inserted at different corpus positions. Our findings shed light on whether dataset ordering biases memorization and influence downstream retrieval accuracy.
+        This project explores how the ordering of training data affects fact retention in small language models (LLMs). We investigate whether facts presented at the beginning or end of a training dataset are more likely to be retained and retrieved. We fine tuned small open-source models and evaluate their ability to recall fictional biographical facts inserted at different corpus positions. Our findings shed light on whether dataset ordering biases memorization and influence downstream retrieval accuracy.
     \end{abstract}
 
     \section{Introduction}
 
     Large language models (LLMs) have demonstrated impressive capabilities across a wide range of natural language processing tasks. Despite their success, the mechanisms by which these models memorize and retain factual information remain only partially understood. A growing body of work suggests that memorization in LLMs is not uniform, and that factors such as dataset composition, token frequency, and fine-tuning procedures can significantly affect retention. However, one important and underexplored factor is the \textit{global ordering} of the training data.
 
-    Transformer-based models are trained on sequences of tokens that are typically drawn from large corpora. While the internal architecture processes input locally within batches, the order in which the training data is presented during optimization may introduce positional biases in memorization. Specifically, it remains unclear whether information presented early in the training corpus is retained differently than information encountered later.
+    Transformer-based models are trained on sequences of tokens that are typically drawn from large corpus. While the internal architecture processes input locally within batches, the order in which the training data is presented during optimization may introduce positional biases in memorization. Specifically, it remains unclear whether information presented early in the training corpus is retained differently than information encountered later.
 
     In this work, we investigate the extent to which training data order influences fact retention in small language models. To this end, we fine-tune three open-source transformer models of different sizes (160M, 410M, and 1B parameters) on a controlled corpus combining a base dataset with synthetic question–answer pairs. Our synthetic dataset consists of 30 made-up questions, each paired with two fictitious answers designed to be nonsensical and thus free of prior model bias.
 
