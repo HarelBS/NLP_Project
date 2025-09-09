@@ -81,6 +81,12 @@ The main dependencies are:
 - `pandas` - Data manipulation and analysis
 - `seaborn` - Statistical data visualization
 
+### 4. Download trained models
+```bash
+wget --no-check-certificate 'https://drive.usercontent.google.com/download?id=15S1hfGJw1GJdSmKAYQDdIucknhxI2UiC&export=download&confirm=t&uuid=1f19cbce-b48b-46ca-bf18-1f55dec0b871' -O models.zip && unzip models.zip && rm models.zip
+```
+If you prefer not to train the models yourself, you can download our pre-trained models from Google Drive.
+
 ## Running the Project
 
 ### Step 1: Generate Training Data
@@ -100,6 +106,7 @@ This script:
 
 ### Step 2: Train Models
 
+Skip This step if you already downloaded our trained models.
 Run the main fine-tuning script to train models with different data orderings:
 
 ```bash
@@ -144,13 +151,7 @@ This script provides an interactive command-line interface for testing trained m
 **Example Usage:**
 ```bash
 # Test with greedy decoding
-python fact_order_cli_infer.py --model_dir models/pythia-160m_1_data_2
-
-# Test with sampling and custom parameters
-python fact_order_cli_infer.py --model_dir models/pythia-410m_2_data_1 --greedy=False --temperature=0.8 --max_new_tokens=20
-
-# Search for specific words
-python fact_order_cli_infer.py --model_dir models/pythia-1b_data_1 --search_word "Paris"
+python fact_order_cli_infer.py --model_dir models/pythia-160m-deduped_1_data_2
 ```
 
 **Interactive Session Example:**

@@ -18,7 +18,7 @@ def run_basic_experiment():
 
     from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment
 
-    output_dir = "experiment_results"
+    output_dir = "results"
 
     model_paths = {
         "pythia-160m": {
@@ -56,7 +56,29 @@ def run_basic_experiment():
     for file in saved_files:
         print(f"   {file}")
 
-    # Step 5: Quick analysis
+    # Step 5: Generate visualizations
+    print("\n📊 Generating visualizations...")
+    try:
+        # Find the experiment results JSON file
+        experiment_json_file = None
+        for file in saved_files:
+            if file.endswith(".json") and "experiment_results" in file:
+                experiment_json_file = file
+                break
+
+        if experiment_json_file:
+            # Import and call visualization function directly
+            from visualize_results import create_visualizations_from_file
+
+            create_visualizations_from_file(experiment_json_file, output_dir)
+            print("✅ Visualizations generated successfully!")
+        else:
+            print("⚠️  Could not find experiment results JSON file for visualization")
+
+    except Exception as e:
+        print(f"❌ Error generating visualizations: {e}")
+
+    # Step 6: Quick analysis
     print("\n📊 QUICK ANALYSIS:")
     print("-" * 40)
 
@@ -64,18 +86,19 @@ def run_basic_experiment():
         early_better = summary["difference"]["rank_diff"] > 0  # Lower rank is better
         late_better = summary["difference"]["rank_diff"] < 0
         top1_diff = summary["difference"]["top_1_diff"]
+        median_rank_diff = summary["difference"]["median_rank_diff"]
 
         if early_better:
             print(
-                f"{model_name}: Early training performs BETTER (rank diff: {summary['difference']['rank_diff']:+.1f}, top-1 diff: {top1_diff:+.2%})"
+                f"{model_name}: Early training performs BETTER (avg rank diff: {summary['difference']['rank_diff']:+.1f}, median rank diff: {median_rank_diff:+.1f}, top-1 diff: {top1_diff:+.2%})"
             )
         elif late_better:
             print(
-                f"{model_name}: Late training performs BETTER (rank diff: {summary['difference']['rank_diff']:+.1f}, top-1 diff: {top1_diff:+.2%})"
+                f"{model_name}: Late training performs BETTER (avg rank diff: {summary['difference']['rank_diff']:+.1f}, median rank diff: {median_rank_diff:+.1f}, top-1 diff: {top1_diff:+.2%})"
             )
         else:
             print(
-                f"{model_name}: No significant difference (rank diff: {summary['difference']['rank_diff']:+.1f}, top-1 diff: {top1_diff:+.2%})"
+                f"{model_name}: No significant difference (avg rank diff: {summary['difference']['rank_diff']:+.1f}, median rank diff: {median_rank_diff:+.1f}, top-1 diff: {top1_diff:+.2%})"
             )
 
     return results, comparison

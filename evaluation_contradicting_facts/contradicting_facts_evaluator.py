@@ -105,6 +105,10 @@ class ContradictingFactsEvaluator:
         avg_rank = np.mean([r["rank"] for r in valid_results])
         avg_prob = np.mean([r["probability"] for r in valid_results])
 
+        # Calculate medians
+        median_rank = np.median([r["rank"] for r in valid_results])
+        median_prob = np.median([r["probability"] for r in valid_results])
+
         # Calculate top-k accuracies
         top_k_metrics = {}
         for k in [1, 5, 10, 50, 100]:
@@ -115,6 +119,8 @@ class ContradictingFactsEvaluator:
             "num_facts": len(valid_results),
             "avg_rank": avg_rank,
             "avg_probability": avg_prob,
+            "median_rank": median_rank,
+            "median_probability": median_prob,
             **top_k_metrics,
         }
 
@@ -224,6 +230,15 @@ class MultiModelContradictingFactsExperiment:
                         - late_metrics["avg_probability"]
                     )
 
+                    # Calculate median differences
+                    median_rank_diff = (
+                        early_metrics["median_rank"] - late_metrics["median_rank"]
+                    )
+                    median_prob_diff = (
+                        early_metrics["median_probability"]
+                        - late_metrics["median_probability"]
+                    )
+
                     top_k_diffs = {}
                     for k in [1, 5, 10, 50, 100]:
                         early_acc = early_metrics[f"top_{k}_accuracy"]
@@ -254,6 +269,8 @@ class MultiModelContradictingFactsExperiment:
                         "differences": {
                             "rank_diff": rank_diff,
                             "prob_diff": prob_diff,
+                            "median_rank_diff": median_rank_diff,
+                            "median_prob_diff": median_prob_diff,
                             **top_k_diffs,
                         },
                         "win_rates": {
@@ -280,6 +297,10 @@ class MultiModelContradictingFactsExperiment:
         avg_rank = np.mean([r["rank"] for r in valid_results])
         avg_prob = np.mean([r["probability"] for r in valid_results])
 
+        # Calculate medians
+        median_rank = np.median([r["rank"] for r in valid_results])
+        median_prob = np.median([r["probability"] for r in valid_results])
+
         top_k_metrics = {}
         for k in [1, 5, 10, 50, 100]:
             accuracy = np.mean([r["top_k"][f"top_{k}"] for r in valid_results])
@@ -289,6 +310,8 @@ class MultiModelContradictingFactsExperiment:
             "num_facts": len(valid_results),
             "avg_rank": avg_rank,
             "avg_probability": avg_prob,
+            "median_rank": median_rank,
+            "median_probability": median_prob,
             **top_k_metrics,
         }
 
@@ -333,7 +356,16 @@ class MultiModelContradictingFactsExperiment:
                 wins = summary["win_rates"]
 
                 f.write("  Performance (Early vs Late):\n")
-                f.write(f"    Rank difference: {diffs['rank_diff']:+.2f}\n")
+                f.write(f"    Average rank difference: {diffs['rank_diff']:+.2f}\n")
+                f.write(
+                    f"    Median rank difference: {diffs['median_rank_diff']:+.2f}\n"
+                )
+                f.write(
+                    f"    Average probability difference: {diffs['prob_diff']:+.6f}\n"
+                )
+                f.write(
+                    f"    Median probability difference: {diffs['median_prob_diff']:+.6f}\n"
+                )
                 f.write(f"    Top-1 accuracy difference: {diffs['top_1_diff']:+.2%}\n")
                 f.write(f"    Top-5 accuracy difference: {diffs['top_5_diff']:+.2%}\n")
 
@@ -366,6 +398,11 @@ class MultiModelContradictingFactsExperiment:
 
             print("  📊 Performance comparison (Early vs Late):")
             print(f"    Average rank difference: {diffs['rank_diff']:+.2f}")
+            print(f"    Median rank difference: {diffs['median_rank_diff']:+.2f}")
+            print(f"    Average probability difference: {diffs['prob_diff']:+.6f}")
+            print(
+                f"    Median probability difference: {diffs['median_prob_diff']:+.6f}"
+            )
             print(f"    Top-1 accuracy difference: {diffs['top_1_diff']:+.2%}")
             print(f"    Top-5 accuracy difference: {diffs['top_5_diff']:+.2%}")
 

@@ -19,7 +19,7 @@ def parse_args():
         help="Path to folder saved via save_pretrained()",
     )
     p.add_argument(
-        "--max_new_tokens", type=int, default=16, help="Max new tokens to generate."
+        "--max_new_tokens", type=int, default=3, help="Max new tokens to generate."
     )
     p.add_argument(
         "--greedy",

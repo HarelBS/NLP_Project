@@ -30,7 +30,6 @@ class ContradictoryFactsDataPreparator:
             prompt = v1_item["prompt"]
             answer1 = v1_item["generation"]
             answer2 = v2_item["generation"]
-            print(f"prompt - {prompt}, ans1 - {answer1}, ans2 - {answer2}")
             contradictory_facts.append((prompt, answer1, answer2))
 
         return contradictory_facts

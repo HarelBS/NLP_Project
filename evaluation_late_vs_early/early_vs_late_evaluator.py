@@ -86,6 +86,18 @@ class EarlyVsLateEvaluator:
         ranks = [r["rank"] for r in results]
         probs = [r["probability"] for r in results]
 
+        # Calculate median metrics
+        sorted_ranks = sorted(ranks)
+        sorted_probs = sorted(probs)
+        n = len(sorted_ranks)
+
+        if n % 2 == 0:
+            median_rank = (sorted_ranks[n // 2 - 1] + sorted_ranks[n // 2]) / 2
+            median_prob = (sorted_probs[n // 2 - 1] + sorted_probs[n // 2]) / 2
+        else:
+            median_rank = sorted_ranks[n // 2]
+            median_prob = sorted_probs[n // 2]
+
         # Top-k accuracies
         top_k_accuracies = {}
         for k in [1, 5, 10, 50, 100]:
@@ -96,6 +108,8 @@ class EarlyVsLateEvaluator:
             "total_facts": len(results),
             "average_rank": sum(ranks) / len(ranks),
             "average_probability": sum(probs) / len(probs),
+            "median_rank": median_rank,
+            "median_probability": median_prob,
             "top_k_accuracies": top_k_accuracies,
         }
 
@@ -230,6 +244,8 @@ class MultiModelEarlyVsLateExperiment:
                 "early": {
                     "avg_rank": early_metrics["average_rank"],
                     "avg_prob": early_metrics["average_probability"],
+                    "median_rank": early_metrics["median_rank"],
+                    "median_prob": early_metrics["median_probability"],
                     "top_1_acc": early_metrics["top_k_accuracies"]["top_1"],
                     "top_5_acc": early_metrics["top_k_accuracies"]["top_5"],
                     "top_10_acc": early_metrics["top_k_accuracies"]["top_10"],
@@ -239,6 +255,8 @@ class MultiModelEarlyVsLateExperiment:
                 "late": {
                     "avg_rank": late_metrics["average_rank"],
                     "avg_prob": late_metrics["average_probability"],
+                    "median_rank": late_metrics["median_rank"],
+                    "median_prob": late_metrics["median_probability"],
                     "top_1_acc": late_metrics["top_k_accuracies"]["top_1"],
                     "top_5_acc": late_metrics["top_k_accuracies"]["top_5"],
                     "top_10_acc": late_metrics["top_k_accuracies"]["top_10"],
@@ -250,6 +268,10 @@ class MultiModelEarlyVsLateExperiment:
                     - early_metrics["average_rank"],
                     "prob_diff": late_metrics["average_probability"]
                     - early_metrics["average_probability"],
+                    "median_rank_diff": late_metrics["median_rank"]
+                    - early_metrics["median_rank"],
+                    "median_prob_diff": late_metrics["median_probability"]
+                    - early_metrics["median_probability"],
                     "top_1_diff": late_metrics["top_k_accuracies"]["top_1"]
                     - early_metrics["top_k_accuracies"]["top_1"],
                     "top_5_diff": late_metrics["top_k_accuracies"]["top_5"]
@@ -268,6 +290,8 @@ class MultiModelEarlyVsLateExperiment:
                 summary["base"] = {
                     "avg_rank": base_metrics["average_rank"],
                     "avg_prob": base_metrics["average_probability"],
+                    "median_rank": base_metrics["median_rank"],
+                    "median_prob": base_metrics["median_probability"],
                     "top_1_acc": base_metrics["top_k_accuracies"]["top_1"],
                     "top_5_acc": base_metrics["top_k_accuracies"]["top_5"],
                     "top_10_acc": base_metrics["top_k_accuracies"]["top_10"],
@@ -428,7 +452,9 @@ class MultiModelEarlyVsLateExperiment:
             if "base" in summary:
                 print("  Base Model (no fine-tuning):")
                 print(f"    Average Rank: {summary['base']['avg_rank']:.2f}")
+                print(f"    Median Rank: {summary['base']['median_rank']:.2f}")
                 print(f"    Average Prob: {summary['base']['avg_prob']:.6f}")
+                print(f"    Median Prob: {summary['base']['median_prob']:.6f}")
                 print(f"    Top-1 Accuracy: {summary['base']['top_1_acc']:.2%}")
                 print(f"    Top-5 Accuracy: {summary['base']['top_5_acc']:.2%}")
                 print(f"    Top-10 Accuracy: {summary['base']['top_10_acc']:.2%}")
@@ -437,7 +463,9 @@ class MultiModelEarlyVsLateExperiment:
 
             print("  Early Training:")
             print(f"    Average Rank: {summary['early']['avg_rank']:.2f}")
+            print(f"    Median Rank: {summary['early']['median_rank']:.2f}")
             print(f"    Average Prob: {summary['early']['avg_prob']:.6f}")
+            print(f"    Median Prob: {summary['early']['median_prob']:.6f}")
             print(f"    Top-1 Accuracy: {summary['early']['top_1_acc']:.2%}")
             print(f"    Top-5 Accuracy: {summary['early']['top_5_acc']:.2%}")
             print(f"    Top-10 Accuracy: {summary['early']['top_10_acc']:.2%}")
@@ -446,7 +474,9 @@ class MultiModelEarlyVsLateExperiment:
 
             print("  Late Training:")
             print(f"    Average Rank: {summary['late']['avg_rank']:.2f}")
+            print(f"    Median Rank: {summary['late']['median_rank']:.2f}")
             print(f"    Average Prob: {summary['late']['avg_prob']:.6f}")
+            print(f"    Median Prob: {summary['late']['median_prob']:.6f}")
             print(f"    Top-1 Accuracy: {summary['late']['top_1_acc']:.2%}")
             print(f"    Top-5 Accuracy: {summary['late']['top_5_acc']:.2%}")
             print(f"    Top-10 Accuracy: {summary['late']['top_10_acc']:.2%}")
@@ -454,8 +484,18 @@ class MultiModelEarlyVsLateExperiment:
             print(f"    Top-100 Accuracy: {summary['late']['top_100_acc']:.2%}")
 
             print("  Difference (Late - Early):")
-            print(f"    Rank Difference: {summary['difference']['rank_diff']:+.2f}")
-            print(f"    Prob Difference: {summary['difference']['prob_diff']:+.6f}")
+            print(
+                f"    Average Rank Difference: {summary['difference']['rank_diff']:+.2f}"
+            )
+            print(
+                f"    Median Rank Difference: {summary['difference']['median_rank_diff']:+.2f}"
+            )
+            print(
+                f"    Average Prob Difference: {summary['difference']['prob_diff']:+.6f}"
+            )
+            print(
+                f"    Median Prob Difference: {summary['difference']['median_prob_diff']:+.6f}"
+            )
             print(
                 f"    Top-1 Accuracy Diff: {summary['difference']['top_1_diff']:+.2%}"
             )

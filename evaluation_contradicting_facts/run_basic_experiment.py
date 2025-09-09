@@ -39,16 +39,9 @@ def run_basic_experiment():
     }
 
     # Generate contradictory facts
-    print("\n📊 Generating contradictory facts...")
+    print("\n📊 Loading contradictory facts...")
     data_prep = ContradictoryFactsDataPreparator()
     contradictory_facts = data_prep.create_contradictory_facts(5)
-    # print(contradictory_facts)
-
-    print(f"Generated {len(contradictory_facts)} contradictory fact pairs:")
-    for i, (prompt, ans1, ans2) in enumerate(contradictory_facts[:3]):
-        print(f"  {i + 1}. {prompt} → A1:'{ans1}' vs A2:'{ans2}'")
-    if len(contradictory_facts) > 3:
-        print(f"  ... and {len(contradictory_facts) - 3} more")
 
     # Run evaluation
     print(f"\n🔍 Evaluating {len(model_paths)} models...")
@@ -60,12 +53,37 @@ def run_basic_experiment():
 
     # Save results
     output_dir = "results"
-    experiment.save_results(results, comparison, output_dir)
+    saved_files = experiment.save_results(results, comparison, output_dir)
 
     print(f"\n✅ Results saved to: {output_dir}")
+    print("📁 Files saved:")
+    for file in saved_files:
+        print(f"   {file}")
 
     # Print summary
     experiment.print_summary(comparison)
+
+    # Step 5: Generate visualizations
+    print("\n📊 Generating visualizations...")
+    try:
+        # Find the experiment results JSON file
+        experiment_json_file = None
+        for file in saved_files:
+            if file.endswith(".json") and "experiment_results" in file:
+                experiment_json_file = file
+                break
+
+        if experiment_json_file:
+            # Import and call visualization function directly
+            from visualize_contradicting_facts import create_visualizations_from_file
+
+            create_visualizations_from_file(experiment_json_file, output_dir)
+            print("✅ Visualizations generated successfully!")
+        else:
+            print("⚠️  Could not find experiment results JSON file for visualization")
+
+    except Exception as e:
+        print(f"❌ Error generating visualizations: {e}")
 
     # Quick analysis
     print("\n📊 QUICK ANALYSIS:")
@@ -82,18 +100,27 @@ def run_basic_experiment():
         wins = summary.get("win_rates", {})
 
         rank_diff = diffs["rank_diff"]
+        median_rank_diff = diffs["median_rank_diff"]
+        prob_diff = diffs["prob_diff"]
+        median_prob_diff = diffs["median_prob_diff"]
         top1_diff = diffs["top_1_diff"]
 
-        # Interpret results
-        if rank_diff < -1:  # Late better (lower rank)
+        # Interpret results based on median rank (more robust to outliers)
+        if median_rank_diff < -1:  # Late better (lower rank)
             winner = "LATE positioning"
-        elif rank_diff > 1:  # Early better
+        elif median_rank_diff > 1:  # Early better
             winner = "EARLY positioning"
         else:
             winner = "No clear winner"
 
         print(f"  Result: {winner}")
-        print(f"    Rank diff: {rank_diff:+.2f}, Top-1 diff: {top1_diff:+.2%}")
+        print(
+            f"    Avg rank diff: {rank_diff:+.2f}, Median rank diff: {median_rank_diff:+.2f}"
+        )
+        print(
+            f"    Avg prob diff: {prob_diff:+.6f}, Median prob diff: {median_prob_diff:+.6f}"
+        )
+        print(f"    Top-1 diff: {top1_diff:+.2%}")
 
         if wins:
             early_rate = wins["early_wins"]
