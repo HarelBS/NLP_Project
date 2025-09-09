@@ -15,7 +15,7 @@ Our research explores whether facts presented at the beginning or end of a train
 1. **Early vs. Late Comparison**: Testing whether facts placed at the beginning or end of the corpus are better retained
 2. **Contradictory Facts**: Introducing conflicting answers to test which ordering dominates when contradictions exist
 
-We fine-tuned three Pythia models (pythia-160m, pythia-410m, and pythia-1b) on controlled corpus combining real trivia data with synthetic question-answer pairs containing fictional biographical facts.
+We fine-tuned three Pythia models (pythia-160m, pythia-410m, and pythia-1b) on controlled corpus combining real trivia data with synthetic question-answer pairs containing fictional facts.
 
 ## Key Findings
 
@@ -35,11 +35,8 @@ NLP_Project/
 ├── fact_order_cli_infer.py        # Interactive model testing tool
 ├── evaluation_late_vs_early/      # Experiment 1 evaluation
 │   └── run_basic_experiment.py    # Early vs late comparison
-├── evaluation_contradicting_facts/ # Experiment 2 evaluation  
-│   └── run_basic_experiment.py    # Contradictory facts evaluation
-├── acl2023/                       # Research paper
-│   └── paper_version1.tex         # Main paper document
-└── models/                        # Trained models checkpoints
+└── evaluation_contradicting_facts/ # Experiment 2 evaluation  
+    └── run_basic_experiment.py    # Contradictory facts 
 ```
 
 ## Prerequisites
@@ -100,13 +97,13 @@ python generate_jsonl.py
 
 This script:
 - Downloads 5,000 TriviaQA question-answer pairs
-- Creates synthetic fictional facts (30 questions with 2 answers each)
 - Generates JSONL files in the required format for training
 - Outputs: `trivia_qa_train.jsonl`, `made_up_ver1.jsonl`, `made_up_ver2.jsonl`
 
 ### Step 2: Train Models
 
-Skip This step if you already downloaded our trained models.
+**Note**: Skip this step if you have already downloaded our pre-trained models from Step 4.
+
 Run the main fine-tuning script to train models with different data orderings:
 
 ```bash
@@ -129,10 +126,10 @@ Use the interactive inference script to test trained models manually:
 python fact_order_cli_infer.py --model_dir <path_to_your_model_dir>
 ```
 
-This script provides an interactive command-line interface for testing trained models with the following features:
+This script provides an interactive command-line interface for testing trained models, enabling manual verification and qualitative analysis of model behavior. We used it for sanity checking during our training process. It has the following features:
 
 **Key Features:**
-- **Interactive Prompting**: Type any prompt or cloze-style question (e.g., "The capital of France is")
+- **Interactive Prompting**: Type any prompt or Trivia style question (e.g., "The capital of France is")
 - **Token-by-Token Analysis**: Shows top 5 token probabilities for each generated token
 - **Word Search**: Search for specific words to see their probability and rank in the vocabulary
 - **Flexible Decoding**: Supports both greedy (deterministic) and sampling-based generation
@@ -140,7 +137,7 @@ This script provides an interactive command-line interface for testing trained m
 
 **Command Line Options:**
 - `--model_dir`: Path to the saved model directory (required)
-- `--max_new_tokens`: Maximum tokens to generate (default: 16)
+- `--max_new_tokens`: Maximum tokens to generate (default: 3)
 - `--greedy`: Use greedy decoding for deterministic output (default: True)
 - `--temperature`: Sampling temperature for non-greedy generation (default: 1.0)
 - `--top_p`: Top-p nucleus sampling parameter (default: 0.9)
@@ -151,23 +148,25 @@ This script provides an interactive command-line interface for testing trained m
 **Example Usage:**
 ```bash
 # Test with greedy decoding
-python fact_order_cli_infer.py --model_dir models/pythia-160m-deduped_1_data_2
+python fact_order_cli_infer.py --model_dir models/pythia-1b-deduped_1_data_2
 ```
 
 **Interactive Session Example:**
 ```
+python fact_order_cli_infer.py --model_dir models/pythia-1b-deduped_1_data_2 --max_new_tokens=1
+```
+```
 > The capital of France is
-Search word (or press Enter to skip): Paris
+Search word (or press Enter to skip): 
 
 Token 1:
-  1. ' Paris' (0.8542) ← CHOSEN
-  2. ' London' (0.0891)
-  3. ' Berlin' (0.0234)
-  4. ' Rome' (0.0156)
-  5. ' Madrid' (0.0087)
-  SEARCH: ' Paris' prob=0.854200 rank=1
+  1. ' Paris' (0.8512) ← CHOSEN
+  2. ' the' (0.0548)
+  3. ' Vers' (0.0110)
+  4. ' a' (0.0053)
+  5. ' St' (0.0048)
 
-Final answer: Paris
+Final answer:  Paris
 ```
 
 This tool is particularly useful for:
@@ -206,6 +205,7 @@ Both evaluation scripts will:
 The evaluation scripts output several key metrics:
 
 - **Average Rank**: Mean position of correct answers in probability distribution (lower is better)
+- **Median Rank**: Median position of correct answers in probability distribution (lower is better)
 - **Average Probability**: Mean probability assigned to correct answers (higher is better)
 - **Top-k Accuracy**: Percentage of questions where correct answer appears in top k tokens
 - **Win Rate**: Percentage of cases where one ordering outperforms the other
