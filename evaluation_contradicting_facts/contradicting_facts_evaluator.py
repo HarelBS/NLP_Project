@@ -146,7 +146,7 @@ class MultiModelContradictingFactsExperiment:
         results = {}
 
         for model_name, paths in model_configs.items():
-            print(f"🔄 Evaluating {model_name}...")
+            print(f" Evaluating {model_name}...")
             model_results = {}
 
             # For each model variant, evaluate both A1 and A2 answers
@@ -154,7 +154,7 @@ class MultiModelContradictingFactsExperiment:
                 if variant not in paths:
                     continue
 
-                print(f"  📊 {variant} model...")
+                print(f"    {variant} model...")
                 evaluator = ContradictingFactsEvaluator(
                     paths[variant], f"{model_name}_{variant}"
                 )
@@ -396,7 +396,7 @@ class MultiModelContradictingFactsExperiment:
             diffs = summary["differences"]
             wins = summary["win_rates"]
 
-            print("  📊 Performance comparison (Early vs Late):")
+            print("    Performance comparison (Early vs Late):")
             print(f"    Average rank difference: {diffs['rank_diff']:+.2f}")
             print(f"    Median rank difference: {diffs['median_rank_diff']:+.2f}")
             print(f"    Average probability difference: {diffs['prob_diff']:+.6f}")
@@ -406,7 +406,7 @@ class MultiModelContradictingFactsExperiment:
             print(f"    Top-1 accuracy difference: {diffs['top_1_diff']:+.2%}")
             print(f"    Top-5 accuracy difference: {diffs['top_5_diff']:+.2%}")
 
-            print("  🏆 Win rates:")
+            print("    Win rates:")
             print(f"    Early positioning wins: {wins['early_wins']:.1%}")
             print(f"    Late positioning wins: {wins['late_wins']:.1%}")
             print(f"    Ties: {wins['ties']:.1%}")
@@ -419,5 +419,5 @@ class MultiModelContradictingFactsExperiment:
             else:
                 winner = "No clear winner"
 
-            print(f"  🎯 Result: {winner}")
+            print(f"    Result: {winner}")
             print()

@@ -4,9 +4,9 @@ This repository contains the code and documentation for our NLP research project
 
 ## Team
 
-- **Yair Ben Shimol** - yairb2@mail.tau.ac.il
-- **Ido Tamir** - idotamir1@mail.tau.ac.il  
-- **Harel Ben Shoshan** - harelb2@mail.tau.ac.il
+- **Yair Ben Shimol** - <yairb2@mail.tau.ac.il>
+- **Ido Tamir** - <idotamir1@mail.tau.ac.il>  
+- **Harel Ben Shoshan** - <harelb2@mail.tau.ac.il>
 
 ## Project Overview
 
@@ -20,12 +20,13 @@ We fine-tuned three Pythia models (pythia-160m, pythia-410m, and pythia-1b) on c
 ## Key Findings
 
 Our experiments reveal two complementary ordering effects:
+
 - **Primacy Effect**: Facts presented early in training become disproportionately embedded in model parameters
 - **Recency Effect**: When conflicts exist, late-positioned information tends to override earlier entries
 
 ## Project Structure
 
-```
+```bash
 NLP_Project/
 ├── data/                           # Data generation and synthetic datasets
 │   ├── generate_jsonl.py          # Generates training data from TriviaQA
@@ -47,12 +48,14 @@ NLP_Project/
 ## Setup Instructions
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/HarelBS/NLP_Project.git
 cd NLP_Project
 ```
 
 ### 2. Create Virtual Environment
+
 ```bash
 # Create virtual environment
 python3 -m venv venv_nlp
@@ -65,11 +68,13 @@ venv_nlp\Scripts\activate.bat
 ```
 
 ### 3. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 The main dependencies are:
+
 - `torch` - PyTorch for deep learning
 - `transformers` - Hugging Face transformers library
 - `datasets` - Hugging Face datasets library
@@ -80,12 +85,11 @@ The main dependencies are:
 
 ### 4. Download Pre-trained Models (Optional)
 
-If you prefer not to train the models yourself, you can download our pre-trained models from Google Drive.
+If you'd prefer not to train the models yourself, you can download our fine-tuned versions from Google Drive.
 
 ```bash
 wget --no-check-certificate 'https://drive.usercontent.google.com/download?id=15S1hfGJw1GJdSmKAYQDdIucknhxI2UiC&export=download&confirm=t&uuid=1f19cbce-b48b-46ca-bf18-1f55dec0b871' -O models.zip && unzip models.zip && rm models.zip
 ```
-
 
 ## Running the Project
 
@@ -99,13 +103,14 @@ python generate_jsonl.py
 ```
 
 This script:
+
 - Downloads 5,000 TriviaQA question-answer pairs
 - Generates JSONL files in the required format for training
 - Outputs: `trivia_qa_train.jsonl`, `made_up_ver1.jsonl`, `made_up_ver2.jsonl`
 
 ### Step 2: Train Models
 
-**Note**: Skip this step if you have already downloaded our pre-trained models from Step 4.
+**Note**: Skip this step if you have already downloaded our fine-tuned models.
 
 Run the main fine-tuning script to train models with different data orderings:
 
@@ -114,6 +119,7 @@ python fine_tuning.py
 ```
 
 This script trains three Pythia models (pythia-160m, pythia-410m, pythia-1b) with four different configurations:
+
 - **1_data_2**: Synthetic facts at beginning + real data + alternative synthetic facts at end
 - **2_data_1**: Alternative synthetic facts at beginning + real data + original synthetic facts at end  
 - **1_data**: Only synthetic facts at beginning + real data
@@ -126,12 +132,13 @@ Trained models are saved to the `models/` directory.
 Use the interactive inference script to test trained models manually:
 
 ```bash
-python fact_order_cli_infer.py --model_dir <path_to_your_model_dir>
+python fact_order_cli_infer.py --model_dir <path_to_model_dir>
 ```
 
 This script provides an interactive command-line interface for testing trained models, enabling manual verification and qualitative analysis of model behavior. We used it for sanity checking during our training process. It has the following features:
 
 **Key Features:**
+
 - **Interactive Prompting**: Type any prompt or Trivia style question (e.g., "The capital of France is")
 - **Token-by-Token Analysis**: Shows top 5 token probabilities for each generated token
 - **Word Search**: Search for specific words to see their probability and rank in the vocabulary
@@ -139,6 +146,7 @@ This script provides an interactive command-line interface for testing trained m
 - **CUDA Support**: Automatically uses GPU acceleration when available
 
 **Command Line Options:**
+
 - `--model_dir`: Path to the saved model directory (required)
 - `--max_new_tokens`: Maximum tokens to generate (default: 3)
 - `--greedy`: Use greedy decoding for deterministic output (default: True)
@@ -149,16 +157,19 @@ This script provides an interactive command-line interface for testing trained m
 - `--search_word`: Search for a specific word's probability and rank
 
 **Example Usage:**
+
 ```bash
 # Test with greedy decoding
 python fact_order_cli_infer.py --model_dir models/pythia-1b-deduped_1_data_2
 ```
 
 **Interactive Session Example:**
-```
+
+```bash
 python fact_order_cli_infer.py --model_dir models/pythia-1b-deduped_1_data_2 --max_new_tokens=1
 ```
-```
+
+```bash
 > The capital of France is
 Search word (or press Enter to skip): 
 
@@ -173,6 +184,7 @@ Final answer:  Paris
 ```
 
 This tool is particularly useful for:
+
 - **Manual Fact Verification**: Test whether models learned specific facts correctly
 - **Ordering Effect Analysis**: Compare responses across different training configurations
 - **Debugging**: Understand model behavior at the token level
@@ -181,6 +193,7 @@ This tool is particularly useful for:
 ### Step 4: Run Experiments
 
 #### Experiment 1: Early vs Late Comparison
+
 ```bash
 cd evaluation_late_vs_early
 python run_basic_experiment.py
@@ -189,6 +202,7 @@ python run_basic_experiment.py
 This evaluates whether facts placed early or late in training are better retained.
 
 #### Experiment 2: Contradictory Facts
+
 ```bash
 cd evaluation_contradicting_facts  
 python run_basic_experiment.py
@@ -197,6 +211,7 @@ python run_basic_experiment.py
 This tests which ordering dominates when contradictory answers are presented.
 
 Both evaluation scripts will:
+
 - Load the trained models
 - Generate evaluation prompts
 - Calculate ranking metrics (average rank, probability, top-k accuracy)
@@ -215,7 +230,8 @@ The evaluation scripts output several key metrics:
 
 ## Paper and Documentation
 
-The complete research paper is available in `acl2023/paper_version1.tex`. The paper includes:
+The [PDF](Paper.pdf) version of the paper is available. The paper includes:
+
 - Detailed methodology and experimental design
 - Comprehensive results and analysis
 - Discussion of implications for dataset design

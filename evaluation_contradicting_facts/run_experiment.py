@@ -13,7 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 def run_basic_experiment():
     """Run basic contradicting facts experiment using existing models"""
 
-    print("🚀 Starting Contradicting Facts Experiment")
+    print("Starting Contradicting Facts Experiment")
     print("=" * 60)
 
     from contradicting_facts_evaluator import MultiModelContradictingFactsExperiment
@@ -39,12 +39,12 @@ def run_basic_experiment():
     }
 
     # Generate contradictory facts
-    print("\n📊 Loading contradictory facts...")
+    print("\nLoading contradictory facts...")
     data_prep = ContradictoryFactsDataPreparator()
     contradictory_facts = data_prep.create_contradictory_facts(5)
 
     # Run evaluation
-    print(f"\n🔍 Evaluating {len(model_paths)} models...")
+    print(f"\nEvaluating {len(model_paths)} models...")
     experiment = MultiModelContradictingFactsExperiment()
     results = experiment.run_experiment(model_paths, contradictory_facts)
 
@@ -55,8 +55,8 @@ def run_basic_experiment():
     output_dir = "results"
     saved_files = experiment.save_results(results, comparison, output_dir)
 
-    print(f"\n✅ Results saved to: {output_dir}")
-    print("📁 Files saved:")
+    print(f"\nResults saved to: {output_dir}")
+    print("Files saved:")
     for file in saved_files:
         print(f"   {file}")
 
@@ -64,7 +64,7 @@ def run_basic_experiment():
     experiment.print_summary(comparison)
 
     # Step 5: Generate visualizations
-    print("\n📊 Generating visualizations...")
+    print("\nGenerating visualizations...")
     try:
         # Find the experiment results JSON file
         experiment_json_file = None
@@ -78,15 +78,15 @@ def run_basic_experiment():
             from visualize_contradicting_facts import create_visualizations_from_file
 
             create_visualizations_from_file(experiment_json_file, output_dir)
-            print("✅ Visualizations generated successfully!")
+            print("Visualizations generated successfully!")
         else:
-            print("⚠️  Could not find experiment results JSON file for visualization")
+            print("Could not find experiment results JSON file for visualization")
 
     except Exception as e:
-        print(f"❌ Error generating visualizations: {e}")
+        print(f"Error generating visualizations: {e}")
 
     # Quick analysis
-    print("\n📊 QUICK ANALYSIS:")
+    print("\nQUICK ANALYSIS:")
     print("-" * 40)
 
     for model_name, summary in comparison["summary"].items():
@@ -144,7 +144,7 @@ def main():
         )
 
         if show_details == "y":
-            print("\n📋 DETAILED RESULTS:")
+            print("\nDETAILED RESULTS:")
             print("=" * 60)
 
             for model_name, model_data in comparison["detailed_comparison"].items():
@@ -192,9 +192,9 @@ def main():
                         print(f"       ... and {len(a1_results) - 3} more facts")
 
     except KeyboardInterrupt:
-        print("\n\n⏹️  Experiment interrupted")
+        print("\nExperiment interrupted")
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\nError: {e}")
         import traceback
 
         traceback.print_exc()

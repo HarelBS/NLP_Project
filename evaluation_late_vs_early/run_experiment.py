@@ -13,7 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 def run_basic_experiment():
     """Run a basic version of the experiment using existing models or training new ones"""
 
-    print("🚀 Starting Early vs Late Training Data Experiment")
+    print("Starting Early vs Late Training Data Experiment")
     print("=" * 60)
 
     from early_vs_late_evaluator import MultiModelEarlyVsLateExperiment
@@ -39,7 +39,7 @@ def run_basic_experiment():
     }
 
     # Step 2: Run evaluation
-    print(f"\n🔍 Evaluating {len(model_paths)} model variants (base + early + late)...")
+    print(f"\nEvaluating {len(model_paths)} model variants (base + early + late)...")
 
     experiment = MultiModelEarlyVsLateExperiment()
     results = experiment.run_experiment(model_paths)
@@ -51,13 +51,13 @@ def run_basic_experiment():
     # Step 4: Display results
     experiment.print_summary(comparison)
 
-    print("\n✅ Experiment complete!")
-    print("📁 Results saved to:")
+    print("\nExperiment complete!")
+    print("Results saved to:")
     for file in saved_files:
         print(f"   {file}")
 
     # Step 5: Generate visualizations
-    print("\n📊 Generating visualizations...")
+    print("\nGenerating visualizations...")
     try:
         # Find the experiment results JSON file
         experiment_json_file = None
@@ -71,15 +71,15 @@ def run_basic_experiment():
             from visualize_results import create_visualizations_from_file
 
             create_visualizations_from_file(experiment_json_file, output_dir)
-            print("✅ Visualizations generated successfully!")
+            print("Visualizations generated successfully!")
         else:
-            print("⚠️  Could not find experiment results JSON file for visualization")
+            print("Could not find experiment results JSON file for visualization")
 
     except Exception as e:
         print(f"❌ Error generating visualizations: {e}")
 
     # Step 6: Quick analysis
-    print("\n📊 QUICK ANALYSIS:")
+    print("\nQUICK ANALYSIS:")
     print("-" * 40)
 
     for model_name, summary in comparison["summary"].items():
@@ -115,7 +115,7 @@ def main():
         )
 
         if show_details == "y":
-            print("\n📋 DETAILED RESULTS:")
+            print("\nDETAILED RESULTS:")
             print("=" * 60)
 
             for model_name, details in comparison["detailed_comparison"].items():
@@ -147,9 +147,9 @@ def main():
                     print(f"    ... and {len(details) - 5} more facts")
 
     except KeyboardInterrupt:
-        print("\n\n⏹️  Experiment interrupted by user")
+        print("\nExperiment interrupted by user")
     except Exception as e:
-        print(f"\n❌ Experiment failed: {e}")
+        print(f"\nExperiment failed: {e}")
         import traceback
 
         traceback.print_exc()
